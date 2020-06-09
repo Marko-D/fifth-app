@@ -12,11 +12,11 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 	const [clearAsync, setClearAsync] = useState(token)
 
 	// REDUX without mapStateToProps and mapDispatchToProps
-	const auth = useSelector((state) => {
-		console.log('homeeee', state.LoginReducers.auth)
-		return state.LoginReducers.auth
-	})
-	const dispatch = useDispatch()
+	// const auth = useSelector((state) => {
+	// 	console.log('homeeee', state.AuthReducer.auth)
+	// 	// return state.AuthReducer.auth
+	// })
+	// const dispatch = useDispatch()
 
 
 	
@@ -53,7 +53,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 
 	return (
 			<View style={styles.container}>
-			<Text style={styles.text}>TOKEN {!!auth ? 'true' : 'false'}</Text>
+			<Text style={styles.text}>TOKEN</Text>
 			<Text style={styles.token}>{token}</Text>
 			<Button title="Go to About" onPress={handlePress} />
 			<Button title="Clear AsyncStorage" onPress={handleClearAsync} />

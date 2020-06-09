@@ -13,9 +13,9 @@ export const PrivateStack: React.FC<PrivateStackProps> = ({}) => {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen name="Home" component={Home} options={{ title: "Home Screen" }}/>
-			{/* <Stack.Screen name="About" component={About}  */}
-			// options={({ route }) => ({	title: route.params.item.name})}			
-			/>
+			{/* <Stack.Screen name="About" component={About} 
+			options={({ route }) => ({	title: route.params.item.name})}			
+			/> */}
 			{/* <Stack.Screen name="SelectRole" component={SelectRole} /> */}
 
 		</Stack.Navigator>

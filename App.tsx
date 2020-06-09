@@ -5,12 +5,12 @@ import { useFonts } from "@use-expo/font";
 import { AppLoading } from "expo";
 import { YellowBox, ActivityIndicator } from "react-native";
 import { View, Text } from "react-native";
-// import { Provider } from "react-redux";
+import { Provider } from "react-redux";
 import { AsyncStorageService } from "./src/core/services/asyncStorageService";
 import configureStore from "./src/store/configureStore";
 
 const App = () => {
-	// const store = configureStore();
+	const store = configureStore();
 	const [loading, setLoadig] = useState(true);
 
 	// store.dispatch({
@@ -75,9 +75,9 @@ const App = () => {
 			);
 		} else {
 			return (
-				// <Provider store={store}>
+				<Provider store={store}>
 					<MainStack />
-				// </Provider>
+				</Provider>
 			);
 		}
 	}
