@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
 import { AsyncStorageService } from "../../core/services/asyncStorageService";
 import { useDispatch, useSelector } from "react-redux"
+import { tokenRemoved } from "../../store/auth";
 // import * as actions from "../login/actions";
 
 interface HomeProps {}
@@ -12,11 +13,11 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 	const [clearAsync, setClearAsync] = useState(token)
 
 	// REDUX without mapStateToProps and mapDispatchToProps
-	// const auth = useSelector((state) => {
-	// 	console.log('homeeee', state.AuthReducer.auth)
-	// 	// return state.AuthReducer.auth
-	// })
-	// const dispatch = useDispatch()
+	const auth = useSelector((state) => {
+		console.log('homeeee', state.auth.token)
+		return !!state.auth.token
+	})
+	const dispatch = useDispatch()
 
 
 	
@@ -25,7 +26,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 	};
 	
 	const handleLogout = () => {
-		// dispatch(actions.logout());
+		dispatch(tokenRemoved());
 		// dispatch(actions.removeUser({}));
 	};
 
@@ -53,7 +54,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 
 	return (
 			<View style={styles.container}>
-			<Text style={styles.text}>TOKEN</Text>
+			<Text style={styles.text}>TOKEN {!!auth ? 'true' : 'false'}</Text>
 			<Text style={styles.token}>{token}</Text>
 			<Button title="Go to About" onPress={handlePress} />
 			<Button title="Clear AsyncStorage" onPress={handleClearAsync} />
