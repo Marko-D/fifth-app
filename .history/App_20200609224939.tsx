@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import MainStack from "./src/routes/mainStack";
 // import "./styles/index";
 import { useFonts } from "@use-expo/font";
-import { AppLoading } from "expo";
+import { AppLoading, registerRootComponent } from "expo";
 import { YellowBox, ActivityIndicator } from "react-native";
 import { View, Text } from "react-native";
-// import { Provider } from "react-redux";
+import { Provider } from "react-redux";
 import { AsyncStorageService } from "./src/core/services/asyncStorageService";
 import configureStore from "./src/store/configureStore";
 
 const App = () => {
-	// const store = configureStore();
+	const store = configureStore();
 	const [loading, setLoadig] = useState(true);
 
 	// store.dispatch({
@@ -22,16 +22,16 @@ const App = () => {
 
 	// console.log('store------------------------ ', store.getState())
 
-	// store.subscribe(() => {
-	// 	// When state will be updated(in our case, when items will be fetched), 
-	// 	// we will update local component state and force component to rerender 
-	// 	// with new data.
+	store.subscribe(() => {
+		// When state will be updated(in our case, when items will be fetched), 
+		// we will update local component state and force component to rerender 
+		// with new data.
 
-	// 	 store.getState()
+		 store.getState()
 			
 		
-	// 	console.log('APP store------------------------ ', store.getState());
-	// });
+		console.log('APP store------------------------ ', store.getState());
+	});
 
 	// “Remote debugger is in a background tab” warning in React Native
 	YellowBox.ignoreWarnings(["Remote debugger"]);
@@ -55,10 +55,10 @@ const App = () => {
 		};
 		
 		// Simulate api call. Delete when developing 
-		// setTimeout(() => {
+		setTimeout(() => {
 			// Execute the created function directly
 			onAppLoad();
-		// }, 5000);
+		}, 5000);
 	}, []);
 
 	const loadingApp = (state) => setLoadig(state);
@@ -75,12 +75,12 @@ const App = () => {
 			);
 		} else {
 			return (
-				// <Provider store={store}>
+				<Provider store={store}>
 					<MainStack />
-				// </Provider>
+				</Provider>
 			);
 		}
 	}
 };
 
-export default App;
+export default registerRootComponent(App);
