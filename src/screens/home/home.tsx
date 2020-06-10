@@ -14,7 +14,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 
 	// REDUX without mapStateToProps and mapDispatchToProps
 	const auth = useSelector((state) => {
-		console.log('homeeee', state.auth.token)
+		// console.log('homeeee', state.auth.token)
 		return !!state.auth.token
 	})
 	const dispatch = useDispatch()
@@ -32,7 +32,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 
 	const getAsyncStorage = async () => {
 		let token = await AsyncStorageService.getItem('token');
-		console.log("token", token);
+		// console.log("token", token);
 		
 		setToken(token)
 	}
@@ -47,7 +47,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 	}
 
 	useEffect(() => {
-		console.log("Home component did mount");
+		// console.log("Home component did mount");
 		getAsyncStorage()
 	}, []);
 

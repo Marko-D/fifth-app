@@ -35,7 +35,7 @@ const App = () => {
 
 	// “Remote debugger is in a background tab” warning in React Native
 	YellowBox.ignoreWarnings(["Remote debugger"]);
-	console.ignoredYellowBox = ["Remote debugger"];
+	// console.ignoredYellowBox = ["Remote debugger"];
 
 	let [fontsLoaded] = useFonts({
 		
@@ -50,8 +50,8 @@ const App = () => {
 			let hasToken = await AsyncStorageService.getItem("token")
 			loadingApp(false);
 
-			console.log("APP LOADED...");
-			console.log("USER LOGGED IN...", !!hasToken);
+			// console.log("APP LOADED...");
+			// console.log("USER LOGGED IN...", !!hasToken);
 		};
 		
 		// Simulate api call. Delete when developing 

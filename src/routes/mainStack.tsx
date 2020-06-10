@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 const MainStack: React.FC<any> = (props) => {
 	const hasToken = !!props.auth;
-	console.log('65464654654',hasToken);
+	// console.log('hasToken',hasToken);
 	return (
 		<NavigationContainer>
 			{/* <ActivityIndicator /> */}
@@ -17,7 +17,7 @@ const MainStack: React.FC<any> = (props) => {
 };
 
 const mapStateToProps = (state) => {
-	console.log("MAIN STACK-------------------", state);
+	// console.log("MAIN STACK-------------------", state);
 	return {
 		auth: state.auth.token
 	};
