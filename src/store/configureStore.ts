@@ -3,16 +3,17 @@ import { combineReducers } from "redux";
 import Environment from "../../active.env";
 
 //Reducers
+// import ExampleReducer from "./example";
 import AuthReducer from "./auth";
-import LoginReducer from "./login";
 
 //Custom middleware
 import Logger from "./middleware/logger";
 import Toastify from "./middleware/toastify";
+import Api from "./middleware/api";
 
 const reducer = combineReducers({
-	auth: AuthReducer,
-	login: LoginReducer
+	// example: ExampleReducer,
+	auth: AuthReducer
 });
 
 export default () =>
@@ -21,6 +22,7 @@ export default () =>
 		middleware: [
       ...getDefaultMiddleware(),
       Logger(Environment),
-      Toastify
+			Toastify,
+			Api
     ]
 	});

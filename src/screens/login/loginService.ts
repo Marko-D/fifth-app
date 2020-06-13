@@ -6,6 +6,14 @@ class LoginService {
 		return axios.post(API.login, data);
 	}
 
+	me(headers): Promise<any> {
+		return axios.get(`${API.login}me`, {headers});
+	}
+
+	selectRole(userId, data, headers): Promise<any> {
+		return axios.post(`${API.admin}users/${userId}/selectedRole`, data, {headers})
+	}
+
 	register(data): Promise<any> {
 		return axios.post(API + "signup", data);
 	}

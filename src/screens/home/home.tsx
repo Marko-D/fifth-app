@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
 import { AsyncStorageService } from "../../core/services/asyncStorageService";
 import { useDispatch, useSelector } from "react-redux"
-import { tokenRemoved } from "../../store/auth";
+import { logout } from "../../store/auth";
 // import * as actions from "../login/actions";
 
 interface HomeProps {}
@@ -26,13 +26,13 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 	};
 	
 	const handleLogout = () => {
-		dispatch(tokenRemoved());
+		dispatch(logout());
 		// dispatch(actions.removeUser({}));
 	};
 
 	const getAsyncStorage = async () => {
 		let token = await AsyncStorageService.getItem('token');
-		// console.log("token", token);
+		console.log("token", token);
 		
 		setToken(token)
 	}

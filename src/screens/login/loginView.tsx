@@ -73,9 +73,9 @@ export const LoginView: React.FC<LoginViewProps> = (props: any): any => {
 const mapStateToProps = (state) => {
 	console.log('mapStateToProps ----------', state)
 	return {
-		auth: state.auth.token,
-		currentUser: state.login.currentUser,
-		loading: state.login.loading
+		// auth: state.auth.token,
+		currentUser: state.auth.currentUser,
+		loading: state.auth.loading
 	}
 }
 

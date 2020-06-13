@@ -5,8 +5,9 @@ import LoginService from "./loginService";
 import LoginView from "./loginView";
 import { AsyncStorageService } from "../../core/services/asyncStorageService";
 import { connect } from 'react-redux'
-import { tokenAdded } from "../../store/auth";
-import { loginSubmit, loginSuccess, loginError } from "../../store/login";
+// import { tokenAdded } from "../../store/auth";
+import { login } from "../../store/auth";
+// import {login, logout} from './store/user'
 
 interface LoginProps {}
 // interface User {
@@ -28,81 +29,83 @@ const Login: React.FC<LoginProps> = (props: any): any => {
 
 	const handleLogin = () => {
 		let data = {
-			password: "P@ssw0rd11",
+			password: "P@ssw0rd",
 			username: "zorica.jankuloska@it-labs.com",
 		};
 
-		props.submitLogin();
+		// props.submitLogin();
 
-		LoginService.login(data).then((res) => {
-			if (res.data.token) {
-				// let roles = res.data.payload.roles;
-				// if (roles.length <= 0) {
-				// } else {
-					// let participantRole = roles.find(
-					// 	(role) => role.name === "Participant"
-					// );
+		props.doLogin(data)
 
-					// setState(true)		
-					me(res.data.token);
-				// }
-			}
-		}).catch(error => {
-			console.log('121231231232131231111111111111',error)
-			props.errorLogin(error.message)
-		});
+		// LoginService.login(data).then((response) => {
+		// 	if (response.data.token) {
+		// 		// let roles = response.data.payload.roles;
+		// 		// if (roles.length <= 0) {
+		// 		// } else {
+		// 			// let participantRole = roles.find(
+		// 			// 	(role) => role.name === "Participant"
+		// 			// );
+
+		// 			// setState(true)		
+		// 			me(response.data.token);
+		// 		// }
+		// 	}
+		// }).catch(error => {
+		// 	console.log('121231231232131231111111111111',error)
+		// 	props.errorLogin(error)
+		// });
 	};
 
-	const me = async (token: string) => {
-		let headers = {
-			"Authorization": `JWT ${token}`,
-			"Accept": "application/json, text/plain, */*",
-			"Content-Type": "application/json; charset=utf-8"
-		};
-		axios.get(`${API.login}me`, {headers}).then(res => {
-			selectedRole(res.data.payload.id, token)
-			props.successLogin(res.data.payload);
-		})
-		.catch((error) => {
-			props.errorLogin(error)
-		});
-	}
+	// const me = async (token: string) => {
+	// 	let headers = {
+	// 		"Authorization": `JWT ${token}`,
+	// 		"Accept": "application/json, text/plain, */*",
+	// 		"Content-Type": "application/json; charset=utf-8"
+	// 	};
+	// 	axios.get(`${API.login}me`, {headers}).then(res => {
+	// 		selectedRole(res.data.payload.id, token)
+	// 		props.successLogin(res.data.payload);
+	// 	})
+	// 	.catch((error) => {
+	// 		props.errorLogin(error)
+	// 	});
+	// }
 
-	const authenticateUser = (payload) => {
-		props.authenticate(payload)
-	}	
+	// const authenticateUser = (payload) => {
+	// 	props.authenticate(payload)
+	// }	
 
 	
-	const selectedRole = (userId: string, token: string) => {
-		let headers = {
-			"Authorization": `JWT ${token}`,
-			"Accept": "application/json, text/plain, */*",
-			"Content-Type": "application/json; charset=utf-8"
-		};
+	// const selectedRole = (userId: string, token: string) => {
+	// 	let headers = {
+	// 		"Authorization": `JWT ${token}`,
+	// 		"Accept": "application/json, text/plain, */*",
+	// 		"Content-Type": "application/json; charset=utf-8"
+	// 	};
 
-		let data = {
-			roleId: "84768ee0-4695-41ae-a83b-7d32248eff57",
-			associateType: null
-		}
+	// 	let data = {
+	// 		roleId: "84768ee0-4695-41ae-a83b-7d32248eff57",
+	// 		associateType: null
+	// 	}
 
-		axios.post(`${API.admin}users/${userId}/selectedRole`, data, {headers}).then(async (res) => {
-			await AsyncStorageService.setItem("token", res.data.payload.token);
-			authenticateUser(res.data.payload.token)
+	// 	axios.post(`${API.admin}users/${userId}/selectedRole`, data, {headers}).then(async (response) => {
+	// 		await AsyncStorageService.setItem("token", response.data.payload.token);
+	// 		authenticateUser(response.data.payload.token)
 			
-			// AsyncStorage.getAllKeys((err, keys) => {
-			// 	AsyncStorage.multiGet(keys, (error, stores) => {
-			// 		stores.map((result, i, store) => {
-			// 			return true;
-			// 		});
-			// 	});
-			// });		
+	// 		// AsyncStorage.getAllKeys((err, keys) => {
+	// 		// 	AsyncStorage.multiGet(keys, (error, stores) => {
+	// 		// 		stores.map((result, i, store) => {
+	// 		// 			return true;
+	// 		// 		});
+	// 		// 	});
+	// 		// });		
 
-			// ConnectionGroupInfo(userId, res.data.payload.token)
-		})
-		.catch((error) => {
-			props.errorLogin(error)
-		});
-	}
+	// 		// ConnectionGroupInfo(userId, response.data.payload.token)
+	// 	})
+	// 	.catch((error) => {
+	// 		props.errorLogin(error)
+	// 	});
+	// }
 
 	// const ConnectionGroupInfo = (userid: string, token: string) => {
 	// 	let headers = {
@@ -124,18 +127,21 @@ const mapDispatchToProps = (dispatch) => {
 	console.log('mapDispatchToProps ----------', dispatch)
 
 	return {
-		authenticate: (token) => {
-			dispatch(tokenAdded(token));
+		// authenticate: (token) => {
+		// 	dispatch(tokenAdded(token));
+		// },
+		doLogin: (data) => {
+			dispatch(login(data));
 		},
-		submitLogin: () => {
-			dispatch(loginSubmit());
-		},
-		successLogin: (user) => {
-			dispatch(loginSuccess(user));
-		},
-		errorLogin: (err) => {
-			dispatch(loginError(err));
-		},
+		// submitLogin: () => {
+		// 	dispatch(loginSubmit());
+		// },
+		// successLogin: (user) => {
+		// 	dispatch(loginSuccess(user));
+		// },
+		// errorLogin: (err) => {
+		// 	dispatch(loginError(err));
+		// },
 	};
 };
 

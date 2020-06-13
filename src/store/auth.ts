@@ -1,21 +1,81 @@
 import { createSlice } from "@reduxjs/toolkit";
+import LoginService from "../screens/login/loginService";
+import { AsyncStorageService } from "../core/services/asyncStorageService";
+
+// THUNK ASYNC FUNCTIONS
+export const login = (data) => async dispatch => {
+  dispatch(loginSubmit());
+  try {
+    let auth = await LoginService.login(data)
+    let headers = {
+      "Authorization": `JWT ${auth.data.token}`,
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json; charset=utf-8"
+    };
+    let participantData = {
+      roleId: "84768ee0-4695-41ae-a83b-7d32248eff57",
+      associateType: null
+    };
+    
+    let me = await LoginService.me(headers)
+    await LoginService.selectRole(me.data.payload.id, participantData, headers )
+    let userData = {
+      token: auth.data.token,
+      user: me.data.payload
+    }
+
+    await AsyncStorageService.setItem("token", auth.data.token);
+
+    dispatch(loginSuccess(userData));
+  } catch(error) {
+    dispatch(loginError(error.message))
+  }
+}
+
+// const getToken = (data) => async dispatch => {
+//   const initialToken = await AsyncStorageService.getItem('token');
+//   dispatch(loginSuccess({token: initialToken}))
+//   return !!initialToken ? initialToken : null
+// }
+
+export const getToken = () => async dispatch => {
+  AsyncStorageService.getItem('token').then((result) => {
+    dispatch(loginSuccess({token: result}))
+  });
+};
+
 
 const initialState = {
-	token: null,
+  token: null,
+  currentUser: {},
+  error: '',
+  loading: false
 };
 
 const AuthReducer = createSlice({
-	name: "AuthReducer",
+	name: "auth",
 	initialState,
 	reducers: {
-		tokenAdded: (state: any, action: any) => {
-			state.token = action.payload;
+		loginSubmit: (state: any) => {
+			state.loading = true;
 		},
-		tokenRemoved: (state: any) => {
-			state.token = null;
+		loginSuccess: (state: any, action: any) => {
+      state.token = action.payload.token;
+      state.currentUser = action.payload.user;
+      state.loading = false;
+    },
+    loginError: (state: any, action: any) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    logout: (state: any) => {
+      state.token = null;
+      state.currentUser = {};
+      state.loading = false;
 		},
 	},
 });
 
-export const { tokenAdded, tokenRemoved } = AuthReducer.actions;
+export const { loginSubmit, loginSuccess, loginError, logout } = AuthReducer.actions;
 export default AuthReducer.reducer;
+
