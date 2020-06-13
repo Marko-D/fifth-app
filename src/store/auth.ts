@@ -24,7 +24,7 @@ export const login = (data) => async dispatch => {
       user: me.data.payload
     }
 
-    await AsyncStorageService.setItem("token", auth.data.token);
+    await AsyncStorageService.setItem("user", JSON.stringify(auth.data.payload));
 
     dispatch(loginSuccess(userData));
   } catch(error) {
@@ -39,8 +39,8 @@ export const login = (data) => async dispatch => {
 // }
 
 export const getToken = () => async dispatch => {
-  AsyncStorageService.getItem('token').then((result) => {
-    dispatch(loginSuccess({token: result}))
+  AsyncStorageService.getItem('user').then((result) => {
+    dispatch(loginSuccess({user: JSON.parse(result)}))
   });
 };
 
@@ -61,7 +61,7 @@ const AuthReducer = createSlice({
 		},
 		loginSuccess: (state: any, action: any) => {
       state.token = action.payload.token;
-      state.currentUser = action.payload.user;
+      state.currentUser = action.payload.user || action.user;
       state.loading = false;
     },
     loginError: (state: any, action: any) => {

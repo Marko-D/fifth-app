@@ -9,17 +9,11 @@ interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = (props: any) => {
 
-	const [token, setToken] = useState<any>('');
-	const [clearAsync, setClearAsync] = useState(token)
-
 	// REDUX without mapStateToProps and mapDispatchToProps
-	const auth = useSelector((state) => {
-		// console.log('homeeee', state.auth.token)
-		return !!state.auth.token
-	})
+	const auth = useSelector((state) => !!state.auth.currentUser)
 	const dispatch = useDispatch()
-
-
+	
+	const [user, setUser] = useState<any>('');
 	
 	const handlePress = () => {
 		props.navigation.navigate("About");
@@ -27,19 +21,18 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 	
 	const handleLogout = () => {
 		dispatch(logout());
-		// dispatch(actions.removeUser({}));
 	};
 
 	const getAsyncStorage = async () => {
-		let token = await AsyncStorageService.getItem('token');
-		console.log("token", token);
-		
-		setToken(token)
+		let user = await AsyncStorageService.getItem('user');
+		let parsedUser = JSON.parse(user)
+		console.log("user", parsedUser);
+		setUser(parsedUser.email)
 	}
 
 	const clearStorage = async () => {
 		await AsyncStorageService.clearAll()
-		setToken(null)
+		setUser(null)
 	}
 
 	const handleClearAsync = async () => {
@@ -54,8 +47,8 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 
 	return (
 			<View style={styles.container}>
-			<Text style={styles.text}>TOKEN {!!auth ? 'true' : 'false'}</Text>
-			<Text style={styles.token}>{token}</Text>
+			<Text style={styles.text}>USER {!!auth ? 'true' : 'false'}</Text>
+			<Text style={styles.token}>{user}</Text>
 			<Button title="Go to About" onPress={handlePress} />
 			<Button title="Clear AsyncStorage" onPress={handleClearAsync} />
 			<Button title="Logout" onPress={handleLogout} />

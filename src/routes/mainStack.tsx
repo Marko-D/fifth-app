@@ -8,7 +8,7 @@ import {getToken} from "../store/auth"
 // import { ActivityIndicator, Text } from "react-native";
 
 const MainStack: React.FC<any> = (props) => {
-	const hasToken = !!props.auth;
+	const isCurrentUserLogged = !!props.auth && Object.entries(props.auth).length > 0;
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ const MainStack: React.FC<any> = (props) => {
 	return (
 		<NavigationContainer>
 			{/* <ActivityIndicator /> */}
-			{hasToken ? <PrivateStack /> : <PublicStack />}
+			{isCurrentUserLogged ? <PrivateStack /> : <PublicStack />}
 		</NavigationContainer>
 	);
 };
@@ -26,7 +26,7 @@ const MainStack: React.FC<any> = (props) => {
 const mapStateToProps = (state) => {
 	// console.log("MAIN STACK-------------------", state);
 	return {
-		auth: state.auth.token
+		auth: state.auth.currentUser
 	};
 };
 
