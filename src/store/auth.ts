@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import LoginService from "../screens/login/loginService";
 import { AsyncStorageService } from "../core/services/asyncStorageService";
+import AuthService from "../core/services/authService";
+import axios from "axios";
 
 // THUNK ASYNC FUNCTIONS
 export const login = (data) => async dispatch => {
@@ -18,13 +20,15 @@ export const login = (data) => async dispatch => {
     };
     
     let me = await LoginService.me(headers)
-    await LoginService.selectRole(me.data.payload.id, participantData, headers )
+    let selectedRole = await LoginService.selectRole(me.data.payload.id, participantData, headers )
     let userData = {
-      token: auth.data.token,
+      token: selectedRole.data.payload.token,
       user: me.data.payload
     }
-
     await AsyncStorageService.setItem("user", JSON.stringify(auth.data.payload));
+
+    let token = !!userData && userData.token;
+    (!!token) && AuthService.authDefaults(token);   
 
     dispatch(loginSuccess(userData));
   } catch(error) {
@@ -38,7 +42,7 @@ export const login = (data) => async dispatch => {
 //   return !!initialToken ? initialToken : null
 // }
 
-export const getToken = () => async dispatch => {
+export const getLoggedUser = () => async dispatch => {
   AsyncStorageService.getItem('user').then((result) => {
     dispatch(loginSuccess({user: JSON.parse(result)}))
   });

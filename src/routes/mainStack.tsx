@@ -4,7 +4,7 @@ import { PublicStack } from "./publicStack";
 import { PrivateStack } from "./privateStack";
 import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux"
-import {getToken} from "../store/auth"
+import {getLoggedUser} from "../store/auth"
 // import { ActivityIndicator, Text } from "react-native";
 
 const MainStack: React.FC<any> = (props) => {
@@ -12,7 +12,7 @@ const MainStack: React.FC<any> = (props) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(getToken())
+		dispatch(getLoggedUser())
 	}, []);
 
 	return (
