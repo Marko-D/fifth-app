@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import LoginService from "../screens/login/loginService";
-import { AsyncStorageService } from "../core/services/asyncStorageService";
+// import { AsyncStorageService } from "../core/services/asyncStorageService";
 import AuthService from "../core/services/authService";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ export const login = (data) => async dispatch => {
       token: selectedRole.data.payload.token,
       user: me.data.payload
     }
-    await AsyncStorageService.setItem("user", JSON.stringify(auth.data.payload));
+    // await AsyncStorageService.setItem("user", JSON.stringify(auth.data.payload));
 
     let token = !!userData && userData.token;
     (!!token) && AuthService.authDefaults(token);   
@@ -42,11 +42,11 @@ export const login = (data) => async dispatch => {
 //   return !!initialToken ? initialToken : null
 // }
 
-export const getLoggedUser = () => async dispatch => {
-  AsyncStorageService.getItem('user').then((result) => {
-    dispatch(loginSuccess({user: JSON.parse(result)}))
-  });
-};
+// export const getLoggedUser = () => async dispatch => {
+//   AsyncStorageService.getItem('user').then((result) => {
+//     dispatch(loginSuccess({user: JSON.parse(result)}))
+//   });
+// };
 
 
 const initialState = {

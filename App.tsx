@@ -26,7 +26,6 @@ const App = () => {
 			// 	}
 			// })
 			
-			// console.log('store------------------------ ', store.getState())
 			
 	// 		store.subscribe(() => {
 	// 			// When state will be updated(in our case, when items will be fetched), 
@@ -36,14 +35,11 @@ const App = () => {
 	// 			let token = !!store.getState() && store.getState().auth.token
 	// 			if(!!token){
 	// 				AuthService.init(token);
-	// 				console.log('APP store------------------------ ', store.getState());
-	// 				console.log('APP store tokentoken------------------------',token)
 	// 		}
 	// });
 
 	// “Remote debugger is in a background tab” warning in React Native
 	YellowBox.ignoreWarnings(["Remote debugger"]);
-	// console.ignoredYellowBox = ["Remote debugger"];
 
 	let [fontsLoaded] = useFonts({
 		
@@ -59,8 +55,6 @@ const App = () => {
 			loadingApp(false);
 			
 
-			// console.log("APP LOADED...");
-			// console.log("USER LOGGED IN...", !!hasToken);
 		};
 		
 		// Simulate api call. Delete when developing 

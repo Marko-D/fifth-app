@@ -66,7 +66,6 @@ export const getConnectionGroupInfo2 = () => async (	dispatch,	getState ) => {
 		let connectionGroupInfo =  await DashboardService.connectionGroupInfo(userId);
 		dispatch(getSuccess(connectionGroupInfo.data.payload));
 	} catch (error) {
-		console.log("dash errrrr", JSON.stringify(error, null, "    "));
 		dispatch(getError(error.message));
 	}
 };

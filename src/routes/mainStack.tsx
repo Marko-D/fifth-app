@@ -4,16 +4,16 @@ import { PublicStack } from "./publicStack";
 import { PrivateStack } from "./privateStack";
 import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux"
-import {getLoggedUser} from "../store/auth"
+// import {getLoggedUser} from "../store/auth"
 // import { ActivityIndicator, Text } from "react-native";
 
 const MainStack: React.FC<any> = (props) => {
 	const isCurrentUserLogged = !!props.auth && Object.entries(props.auth).length > 0;
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 
-	useEffect(() => {
-		dispatch(getLoggedUser())
-	}, []);
+	// useEffect(() => {
+	// 	dispatch(getLoggedUser())
+	// }, []);
 
 	return (
 		<NavigationContainer>

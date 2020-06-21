@@ -124,8 +124,6 @@ const Login: React.FC<LoginProps> = (props: any): any => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	console.log('mapDispatchToProps ----------', dispatch)
-
 	return {
 		// authenticate: (token) => {
 		// 	dispatch(tokenAdded(token));

@@ -10,12 +10,12 @@ import AuthReducer from "./auth";
 import DashboardReducer from "./dashboard";
 
 //Custom middleware
-import Logger from "./middleware/logger";
+// import Logger from "./middleware/logger";
 import Toastify from "./middleware/toastify";
 import Api from "./middleware/api";
 
 import { persistReducer} from "redux-persist";
-import {createLogger} from "redux-logger";
+import logger from 'redux-logger'
 
 const reducer = combineReducers({
 	// example: ExampleReducer,
@@ -39,7 +39,8 @@ export default () =>
 		middleware: [
 			// ...getDefaultMiddleware(),
 			thunk,
-      Logger(Environment),
+			logger,
+      // Logger(Environment),
 			Toastify,
 			Api
     ]
