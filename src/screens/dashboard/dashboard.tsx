@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import dashboardService from "./dashboardService";
-import { getConnectionGroupInfo, getConnectionGroupInfo2 } from "../../store/dashboard";
+import { getConnectionGroupInfo } from "../../store/dashboard";
 import { connect } from "react-redux";
 import Loader from "../../components/loader";
 
 interface DashboardProps {}
-
-const initialState = {
-	numberOfConnectionGroups: null,
-	numberOfConnectionRequests: null,
-	numberOfConnections: null,
-};
 
 const Dashboard: React.FC<DashboardProps> = (props: any) => {
 	useEffect(() => {
@@ -25,15 +18,19 @@ const Dashboard: React.FC<DashboardProps> = (props: any) => {
 
 	return (
 		<View style={styles.container}>
-				{!!props.dashboard.loading ? 
-				<View><Loader /></View> : 
+			{!!props.dashboard.loading ? (
+				<View>
+					<Loader />
+				</View>
+			) : (
 				<View>
 					<Text style={styles.text}>
 						numberOfConnectionGroups:{" "}
 						{props.dashboard.connectionGroupInfo?.numberOfConnectionGroups}
 					</Text>
 					<Button title="Go to Home" onPress={goToHome} />
-				</View>}		
+				</View>
+			)}
 		</View>
 	);
 };
@@ -64,17 +61,14 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = (dispatch) => {
-	console.log("mapDispatchToProps ----------", dispatch);
-
 	return {
 		getData: () => {
-			dispatch(getConnectionGroupInfo2());
+			dispatch(getConnectionGroupInfo());
 		},
 	};
 };
 
 const mapStateToProps = (state) => {
-	// console.log("dashboard.connectionGroupInfo-------------------", state);
 	return {
 		dashboard: state.dashboard,
 	};

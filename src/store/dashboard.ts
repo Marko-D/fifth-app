@@ -31,7 +31,6 @@ const DashboardReducer = createSlice({
 			state.loading = true;
 		},
 		getSuccess: (state: any, action: any) => {
-			debugger;
 			const data: ConnectionGroupInfo = action.payload;
 			state.connectionGroupInfo = data;
 			state.loading = false;
@@ -47,7 +46,7 @@ export const { getRequest, getSuccess, getError } = DashboardReducer.actions;
 export default DashboardReducer.reducer;
 
 
-export const getConnectionGroupInfo2 = () => async (	dispatch,	getState ) => {
+export const getConnectionGroupInfo = () => async (	dispatch,	getState ) => {
   const userId = getState().auth.currentUser.id;
   dispatch(actions.apiRequestStart({
     url: `${API.admin}dashboard/${userId}/connectionGroupInfo`,
@@ -59,7 +58,8 @@ export const getConnectionGroupInfo2 = () => async (	dispatch,	getState ) => {
 }
 
 // THUNK ASYNC FUNCTIONS
-export const getConnectionGroupInfo = () => async (	dispatch,	getState ) => {
+// Regular THUNK function
+export const getConnectionGroupInfo2 = () => async (	dispatch,	getState ) => {
 	dispatch(getRequest());
 	try {
 		const userId = getState().auth.currentUser.id;

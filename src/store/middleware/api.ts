@@ -6,13 +6,14 @@ const Api = ({ dispatch, getState }) => next => async action => {
   if (action.type !== actions.apiRequestStart.type) {
     return next(action);
   }
-  next(action);
   
 	const { url, method, data, onStart, onSuccess, onError, params } = action.payload;
   
   if(onStart){
     dispatch({ type: onStart });
   }
+  
+  next(action);
 
 	try {
     // Grab the token from state
@@ -20,6 +21,8 @@ const Api = ({ dispatch, getState }) => next => async action => {
     const defaultOptions = {
       headers: {
         Authorization: token ? `JWT ${token}` : '',
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json; charset=utf-8"
       }
     };
     
@@ -31,21 +34,15 @@ const Api = ({ dispatch, getState }) => next => async action => {
 
     const response = await axios[method](url, options);
 
-    console.log("response-----------------", response.data.payload);
-
     dispatch(actions.apiRequestSuccess(response.data.payload));
     if(onSuccess){
       dispatch({ type: onSuccess, payload: response.data.payload });
     }
 	} catch (error) {
-    console.log("error-----------------", error.message);
-
     dispatch(actions.apiRequestError(error.message));
     if(onError){
       dispatch({ type: onError, payload: error.message });
     }
-    
-
 	}
 };
 
