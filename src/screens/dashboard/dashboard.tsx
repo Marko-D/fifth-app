@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import dashboardService from "./dashboardService";
-import { getConnectionGroupInfo } from "../../store/dashboard";
+import { getConnectionGroupInfo, getConnectionGroupInfo2 } from "../../store/dashboard";
 import { connect } from "react-redux";
 import Loader from "../../components/loader";
 
@@ -67,8 +67,8 @@ const mapDispatchToProps = (dispatch) => {
 	console.log("mapDispatchToProps ----------", dispatch);
 
 	return {
-		getData: (data) => {
-			dispatch(getConnectionGroupInfo(data));
+		getData: () => {
+			dispatch(getConnectionGroupInfo2());
 		},
 	};
 };
