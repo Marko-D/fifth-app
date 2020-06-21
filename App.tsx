@@ -8,10 +8,14 @@ import { View, Text } from "react-native";
 import { Provider } from "react-redux";
 import { AsyncStorageService } from "./src/core/services/asyncStorageService";
 import configureStore from "./src/store/configureStore";
-import AuthService from "./src/core/services/authService";
+// import AuthService from "./src/core/services/authService";
+import {persistStore} from "redux-persist";
+import {PersistGate} from "redux-persist/es/integration/react";
+
 
 const App = () => {
 	const store = configureStore();
+	const persistedStore = persistStore(store);
 	const [loading, setLoadig] = useState(true);
 	
 	
@@ -81,7 +85,9 @@ const App = () => {
 		} else {
 			return (
 				<Provider store={store}>
-					<MainStack />
+					<PersistGate persistor={persistedStore} loading={null}>
+						<MainStack />
+					</PersistGate>
 				</Provider>
 			);
 		}
