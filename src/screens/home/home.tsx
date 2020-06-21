@@ -11,6 +11,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 
 	// REDUX without mapStateToProps and mapDispatchToProps
 	const auth = useSelector((state) => !!state.auth.currentUser)
+	const currentUser = useSelector((state) => state.auth.currentUser)
 	const dispatch = useDispatch()
 	
 	const [user, setUser] = useState<any>('');
@@ -23,12 +24,12 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 		dispatch(logout());
 	};
 
-	const getAsyncStorage = async () => {
-		let user = await AsyncStorageService.getItem('user');
-		let parsedUser = JSON.parse(user)
-		console.log("user", parsedUser);
-		setUser(parsedUser.email)
-	}
+	// const getAsyncStorage = async () => {
+	// 	let user = await AsyncStorageService.getItem('user');
+	// 	let parsedUser = JSON.parse(user)
+	// 	console.log("user", parsedUser);
+	// 	setUser(parsedUser.email)
+	// }
 
 	const clearStorage = async () => {
 		await AsyncStorageService.clearAll()
@@ -39,16 +40,16 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 		clearStorage()
 	}
 
-	useEffect(() => {
-		// console.log("Home component did mount");
-		getAsyncStorage()
-	}, []);
+	// useEffect(() => {
+	// 	// console.log("Home component did mount");
+	// 	getAsyncStorage()
+	// }, []);
 
 
 	return (
-			<View style={styles.container}>
+		<View style={styles.container}>
 			<Text style={styles.text}>USER {!!auth ? 'true' : 'false'}</Text>
-			<Text style={styles.token}>{user}</Text>
+			<Text style={styles.token}>{currentUser.firstName} {currentUser.lastName}</Text>
 			<Button title="Go to About" onPress={handlePress} />
 			<Button title="Clear AsyncStorage" onPress={handleClearAsync} />
 			<Button title="Logout" onPress={handleLogout} />
