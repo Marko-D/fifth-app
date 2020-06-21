@@ -6,8 +6,13 @@ const Api = ({ dispatch, getState }) => next => async action => {
   if (action.type !== actions.apiRequestStart.type) {
     return next(action);
   }
-	next(action);
-	const { url, method, data, onSuccess, onError, params } = action.payload;
+  next(action);
+  
+	const { url, method, data, onStart, onSuccess, onError, params } = action.payload;
+  
+  if(onStart){
+    dispatch({ type: onStart });
+  }
 
 	try {
     // Grab the token from state
