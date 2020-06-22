@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { getConnectionGroupInfo } from "../../store/dashboard";
+import { connectionGroupInfo } from "../../store/dashboard";
 import { connect } from "react-redux";
 import Loader from "../../components/loader";
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getData: () => {
-			dispatch(getConnectionGroupInfo());
+			dispatch(connectionGroupInfo());
 		},
 	};
 };

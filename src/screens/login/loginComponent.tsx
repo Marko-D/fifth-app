@@ -27,11 +27,11 @@ const Login: React.FC<LoginProps> = (props: any): any => {
 		props.navigation.navigate("Register");
 	};
 
-	const handleLogin = () => {
-		let data = {
-			password: "P@ssw0rd",
-			username: "zorica.jankuloska@it-labs.com",
-		};
+	const handleLogin = (data) => {
+		// let data = {
+		// 	password: "P@ssw0rd",
+		// 	username: "zorica.jankuloska@it-labs.com",
+		// };
 
 		// props.submitLogin();
 

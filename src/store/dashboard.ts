@@ -30,7 +30,7 @@ const DashboardReducer = createSlice({
 		getRequest: (state: any) => {
 			state.loading = true;
 		},
-		getSuccess: (state: any, action: any) => {
+		getConnectionGroupInfo: (state: any, action: any) => {
 			const data: ConnectionGroupInfo = action.payload;
 			state.connectionGroupInfo = data;
 			state.loading = false;
@@ -42,17 +42,17 @@ const DashboardReducer = createSlice({
   },
 });
 
-export const { getRequest, getSuccess, getError } = DashboardReducer.actions;
+export const { getRequest, getConnectionGroupInfo, getError } = DashboardReducer.actions;
 export default DashboardReducer.reducer;
 
 
-export const getConnectionGroupInfo = () => async (	dispatch,	getState ) => {
+export const connectionGroupInfo = () => async (	dispatch,	getState ) => {
   const userId = getState().auth.currentUser.id;
   dispatch(actions.apiRequestStart({
     url: `${API.admin}dashboard/${userId}/connectionGroupInfo`,
     method: 'get',
     onStart: getRequest.type,
-    onSuccess: getSuccess.type,
+    onSuccess: getConnectionGroupInfo.type,
     onError: getError.type
   }))
 }
@@ -64,7 +64,7 @@ export const getConnectionGroupInfo2 = () => async (	dispatch,	getState ) => {
 	try {
 		const userId = getState().auth.currentUser.id;
 		let connectionGroupInfo =  await DashboardService.connectionGroupInfo(userId);
-		dispatch(getSuccess(connectionGroupInfo.data.payload));
+		dispatch(getConnectionGroupInfo(connectionGroupInfo.data.payload));
 	} catch (error) {
 		dispatch(getError(error.message));
 	}

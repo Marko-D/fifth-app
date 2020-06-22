@@ -7,58 +7,79 @@ import {
 	TouchableOpacity,
 	ImageBackground,
 	SafeAreaView,
-	ActivityIndicator
+	ActivityIndicator,
+	Alert,
+	Button,
 } from "react-native";
-import { connect } from 'react-redux'
-import styles from './loginStyle';
-import Environment from '../../../active.env'
+import { connect } from "react-redux";
+import styles from "./loginStyle";
+import Environment from "../../../active.env";
 import Loader from "../../components/loader";
-
+import { useForm, Controller } from "react-hook-form";
 
 interface LoginViewProps {
-  navigateToRegister: any,
-  login: any,
-  title: any
+	navigateToRegister: any;
+	login: any;
+	title: any;
 }
 
+type LoginForm = {
+	userName: string;
+	password: string;
+};
+
 export const LoginView: React.FC<LoginViewProps> = (props: any): any => {
-	const [value, onChangeText] = React.useState("Useless Placeholder");
+	// FORM
+	const { control, handleSubmit, errors } = useForm<LoginForm>();
+	const onSubmit = (data) => props.login(data);
+
 	return (
 		<ImageBackground
 			source={require("../../../assets/images/bg.jpg")}
 			style={styles.container}
 		>
 			<SafeAreaView>
-				{/* {!!props.loading && 
-
-					<View style={styles.loading}>
-					<ActivityIndicator size='large' />
-					</View>
-				// <ActivityIndicator  color="#bc2b78" size="large" style={styles.loading} 
-				/>} */}
-
-				{!!props.loading && <Loader/>}
+				{!!props.loading && <Loader />}
 				<Image
 					style={styles.logo}
 					source={require("../../../assets/images/logo.png")}
 				/>
 				<Text style={styles.env}>{Environment}</Text>
 				<Text style={styles.paragraph}>{props.title}</Text>
-				<TextInput
-					style={styles.input}
-					onChangeText={(text) => onChangeText(text)}
-					value={value}
+
+				<Controller
+					as={TextInput}
+					control={control}
+					name="userName"
+					onChange={(args) => args[0].nativeEvent.text}
+					rules={{ required: true }}
+					defaultValue=""
+					placeholder="User Name"
+					// style={styles.input}
+					style={[
+            styles.input,
+						{ 
+							borderColor: errors.userName ? '#fc6d47' : '#c0cbd3',
+							borderWidth: errors.userName ? 3 : 1
+					 },
+          ]}
 				/>
-				<TextInput
+				{errors.userName && <Text>This is required.</Text>}
+
+				<Controller
+					as={TextInput}
+					control={control}
+					name="password"
+					onChange={(args) => args[0].nativeEvent.text}
+					defaultValue=""
+					placeholder="Password"
 					style={styles.input}
-					onChangeText={(text) => onChangeText(text)}
-					value={value}
 				/>
-				<TouchableOpacity style={styles.btnPrimary} onPress={props.login}>
+
+				<TouchableOpacity style={styles.btnPrimary} onPress={handleSubmit(onSubmit)}>
 					<Text style={styles.btnPrimaryTxt}>Login</Text>
 				</TouchableOpacity>
-				<TouchableOpacity
-					style={styles.btnLink}
+				<TouchableOpacity style={styles.btnLink}
 					// onPress={handlePress}
 				>
 					<Text style={styles.btnLinkTxt} onPress={props.navigateToRegister}>
@@ -72,10 +93,9 @@ export const LoginView: React.FC<LoginViewProps> = (props: any): any => {
 
 const mapStateToProps = (state) => {
 	return {
-		// auth: state.auth.token,
 		currentUser: state.auth.currentUser,
-		loading: state.auth.loading
-	}
-}
+		loading: state.auth.loading,
+	};
+};
 
-export default connect(mapStateToProps, null)(LoginView)
+export default connect(mapStateToProps, null)(LoginView);

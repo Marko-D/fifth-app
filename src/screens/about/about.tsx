@@ -62,6 +62,7 @@ export const About: React.FC<AboutProps> = ({ navigation }: any) => {
 			<View style={styles.container}>
 				<FlatList
 					data={items}
+					keyExtractor={item => item.id.toString()}
 					renderItem={({ item }) => (
 						<Text style={styles.name}>
 							{item.name} {item.surname}
