@@ -51,6 +51,7 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 			<Text style={styles.text}>USER {!!auth ? 'true' : 'false'}</Text>
 			<Text style={styles.token}>{currentUser.firstName} {currentUser.lastName}</Text>
 			<Button title="Go to About" onPress={handlePress} />
+			<Button title="Go to MyProfile" onPress={	() =>	props.navigation.navigate("MyProfile")} />
 			<Button title="Clear AsyncStorage" onPress={handleClearAsync} />
 			<Button title="Logout" onPress={handleLogout} />
 		</View>

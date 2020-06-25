@@ -4,6 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Home } from "../screens/home/home";
 import { About } from "../screens/about/about";
 import Dashboard from "../screens/dashboard/dashboard";
+import MyProfile from "../screens/myprofile/myprofile";
+
 // import { SelectRole } from "../screens/selectRole/SelectRole";
 
 interface PrivateStackProps {}
@@ -15,6 +17,7 @@ export const PrivateStack: React.FC<PrivateStackProps> = ({}) => {
 		<Stack.Navigator>
 			<Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false, title: "Dashboard Screen" }}/>
 			<Stack.Screen name="Home" component={Home} options={{ title: "Home Screen" }}/>
+			<Stack.Screen name="MyProfile" component={MyProfile} options={{ title: "My Profile" }}/>
 			<Stack.Screen name="About" component={About} 
 			// options={({ route }) => ({	title: route.params.item.name})}			
 			/>

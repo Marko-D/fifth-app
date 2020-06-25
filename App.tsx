@@ -12,6 +12,9 @@ import configureStore from "./src/store/configureStore";
 import {persistStore} from "redux-persist";
 import {PersistGate} from "redux-persist/es/integration/react";
 
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const App = () => {
 	const store = configureStore();
@@ -45,15 +48,23 @@ const App = () => {
 		
 		"Nunito-Regular": require("./assets/fonts/Nunito-Regular.ttf"),
 		"Nunito-Bold": require("./assets/fonts/Nunito-Bold.ttf"),
+		"Roboto": require('native-base/Fonts/Roboto.ttf'),
+		"Roboto_medium": require('native-base/Fonts/Roboto_medium.ttf'),
+		...Ionicons.font,
 	});
 
 	// How to use async functyion in usEffect hook
 	useEffect(() => {
 		// Create an scoped async function in the hook
 		const onAppLoad = async () => {
-			let hasToken = await AsyncStorageService.getItem("token")
+			// let hasToken = await AsyncStorageService.getItem("token")
 			loadingApp(false);
 			
+			// await Font.loadAsync({
+			// 	Roboto: require('native-base/Fonts/Roboto.ttf'),
+			// 	Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+			// 	...Ionicons.font,
+			// });
 
 		};
 		
