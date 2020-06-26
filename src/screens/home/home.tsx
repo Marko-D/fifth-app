@@ -49,9 +49,11 @@ export const Home: React.FC<HomeProps> = (props: any) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>USER {!!auth ? 'true' : 'false'}</Text>
-			<Text style={styles.token}>{currentUser.firstName} {currentUser.lastName}</Text>
+			<Text style={styles.token}>{currentUser.email} {currentUser.lastName}</Text>
 			<Button title="Go to About" onPress={handlePress} />
+			<Button title="Go to Dashboard" onPress={	() =>	props.navigation.navigate("Dashboard")} />
 			<Button title="Go to MyProfile" onPress={	() =>	props.navigation.navigate("MyProfile")} />
+			<Button title="Go to Blog" onPress={	() =>	props.navigation.navigate("Blog")} />
 			<Button title="Clear AsyncStorage" onPress={handleClearAsync} />
 			<Button title="Logout" onPress={handleLogout} />
 		</View>

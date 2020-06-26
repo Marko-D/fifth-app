@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 // import ExampleReducer from "./example";
 import AuthReducer from "./auth";
 import DashboardReducer from "./dashboard";
+import BlogReducer from "./blog";
 
 //Custom middleware
 // import Logger from "./middleware/logger";
@@ -20,7 +21,8 @@ import logger from 'redux-logger'
 const reducer = combineReducers({
 	// example: ExampleReducer,
 	auth: AuthReducer,
-	dashboard: DashboardReducer
+	dashboard: DashboardReducer,
+	blog: BlogReducer
 });
 
 const persistConfig = {
