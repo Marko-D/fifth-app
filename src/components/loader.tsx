@@ -1,24 +1,13 @@
-// import { ActivityIndicator } from 'react-native';
-// import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native'
-
-// export default Loader() => {
-//   return (
-//     <>
-//     <View style={styles.loading}>
-//       <ActivityIndicatoricator color="#bc2b78" size="large" />
-//     </View>
-//     </>
-//   );
-// }
-
 import React from 'react'
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
+import Constants from "expo-constants";
+import { Colors, Typography } from "../styles";
 
 const Loader = () => {
+  let color = Colors.WARNING
   return (
     <View style={styles.loading}>
-      <ActivityIndicator color="#bc2b78" size="large" />
+      <ActivityIndicator color={color} size="large" />
     </View>
   )
 }
