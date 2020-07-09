@@ -6,10 +6,14 @@ import { About } from "../screens/about/about";
 import Dashboard from "../screens/dashboard/dashboard";
 import MyProfile from "../screens/myprofile/myprofile";
 import Blog from "../screens/blog/blogComponent";
+import Persons from "../screens/persons/personsComponent";
+
+// NESTED 
 import HomeTabNavigator from "../screens/home/homeTabs";
 
 import Constants from "expo-constants";
 import { Colors, Typography } from "../styles";
+import { EMG_ALERT } from "../styles/colors";
 
 interface PrivateStackProps {}
 
@@ -31,6 +35,8 @@ const getHeaderTitle = (route) => {
 			return "About";
 		case "MyProfile":
 			return "My Profile";
+		case "Persons":
+			return "Persons";
 	}
 };
 
@@ -41,10 +47,10 @@ export const PrivateStack: React.FC<PrivateStackProps> = ({}) => {
 			screenOptions={{
 				gestureEnabled: true,
 				headerStyle: {
-					backgroundColor: Colors.PRIMARY,
+					backgroundColor: EMG_ALERT,
 				},
 				headerTitleStyle: {
-					fontWeight: "bold",
+					fontWeight: "bold"
 				},
 				headerTintColor: Colors.WHITE,
 				headerBackTitleVisible: false,
@@ -78,6 +84,11 @@ export const PrivateStack: React.FC<PrivateStackProps> = ({}) => {
 				component={About}
 				// options={({ route }) => ({	title: route.params.item.name})}
 			/>
+			<Stack.Screen
+				name="Persons"
+				component={Persons}
+				// options={({ route }) => ({	title: route.params.item.name})}
+			/>			
 		</Stack.Navigator>
 	);
 };

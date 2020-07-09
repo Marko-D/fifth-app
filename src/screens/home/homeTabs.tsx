@@ -6,6 +6,7 @@ import { Home } from "../home/home";
 import Blog from "../blog/blogComponent";
 import Dashboard from "../dashboard/dashboard";
 import MyProfile from "../myprofile/myprofile";
+import Persons from "../persons/personsComponent";
 import { About } from "../about/about";
 
 import Constants from "expo-constants";
@@ -33,8 +34,10 @@ const HomeTabNavigator = () => {
 					} else if (route.name == "Dashboard") {
 						iconName = "ios-happy";
 					} else if (route.name == "About") {
-						iconName = "ios-infinite";
+						iconName = "ios-book";
 					} else if (route.name == "MyProfile") {
+						iconName = "ios-settings";
+					} else if (route.name == "Persons") {
 						iconName = "ios-person";
 					}
 					return <Ionicons name={iconName} color={color} size={size} />;
@@ -46,6 +49,7 @@ const HomeTabNavigator = () => {
 			<Tab.Screen name="Blog" component={Blog} />
 			<Tab.Screen name="About" component={About} />
 			<Tab.Screen name="MyProfile" component={MyProfile} />
+			<Tab.Screen name="Persons" component={Persons} />
 		</Tab.Navigator>
 	);
 };
