@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { connectionGroupInfo } from "../../store/dashboard";
 import { connect } from "react-redux";
 import Loader from "../../components/loader";
+import ConnectionControl from "../../components/connectionControl";
 
 interface DashboardProps {}
 
@@ -17,21 +18,25 @@ const Dashboard: React.FC<DashboardProps> = (props: any) => {
 	};
 
 	return (
+		
 		<View style={styles.container}>
-			{!!props.dashboard.loading ? (
-				<View>
-					<Loader />
-				</View>
-			) : (
-				<View>
-					<Text style={styles.text}>
-						numberOfConnectionGroups:{" "}
-						{props.dashboard.connectionGroupInfo?.numberOfConnectionGroups}
-					</Text>
-					<Button title="Go to Home" onPress={goToHome} />
-				</View>
-			)}
-		</View>
+		<ConnectionControl refresh={props.getData} />	
+				{!!props.dashboard.loading ? (
+					<View>
+						<Loader />
+					</View>
+				) : (
+					<View>
+						<Text style={styles.text}>
+							numberOfConnectionGroups:{" "}
+							{props.dashboard.connectionGroupInfo?.numberOfConnectionGroups}
+						</Text>
+						<Button title="Go to Home" onPress={goToHome} />
+					</View>
+				)}
+			</View>
+			
+	
 	);
 };
 

@@ -1,7 +1,9 @@
 import React, { useEffect }  from "react";
 import BlogView from "./blogView";
 import { connect } from 'react-redux'
-import { getRssFeed } from "../../store/blog";
+import { getRssFeed, searchRssFeed } from "../../store/blog";
+import { useForm, Controller } from "react-hook-form";
+import ConnectionControl from "../../components/connectionControl";
 
 interface BlogProps {}
 // interface User {
@@ -13,10 +15,26 @@ interface BlogProps {}
 // 	url: string;
 // 	data: User;
 // }
+
+
+
 const Blog: React.FC<BlogProps> = (props: any): any => {
+	// FORM
+	const onSubmit = (data) => {
+		// console.log(data);
+		props.searchBlog(data);
+	};
+
+
+	const getData = () => {
+		props.getBlogData();
+	};
+
+	
+
 	
 	useEffect(() => {
-		props.getData();
+		getData()
 	}, []);
 
 	// const navRegister = () => {
@@ -24,16 +42,22 @@ const Blog: React.FC<BlogProps> = (props: any): any => {
 	// };
 
 	return (
-		<BlogView  />
+		<ConnectionControl refresh={getData}>
+			<BlogView  onSubmit={onSubmit} onClear={getData}/>
+		</ConnectionControl>
 	);
 };
 
 const mapDispatchToProps = (dispatch) => {
-	console.log("BLOOOG mapDispatchToProps");
+	// console.log("BLOOOG mapDispatchToProps");
 	return {
-		getData: () => {
+		getBlogData: () => {
 			dispatch(getRssFeed());
 		},
+		searchBlog: (term) => {
+			debugger
+			dispatch(searchRssFeed(term));
+		}
 	};
 };
 
