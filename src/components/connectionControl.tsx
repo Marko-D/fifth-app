@@ -4,6 +4,7 @@ import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 import Constants from "expo-constants";
 import { useIsFocused } from '@react-navigation/native';
 import Marta from './marta';
+import Toast from 'react-native-simple-toast';
 interface ConnectionControlProps {
   refresh?: any
 }
@@ -17,6 +18,7 @@ const ConnectionControl: React.FC<ConnectionControlProps> = ({children, refresh}
   const checkConnectivity = (refreshState) => {
     NetInfo.fetch().then(state => {
       refresh()
+      Toast.show('Established internet connection');
     });
   };
 
