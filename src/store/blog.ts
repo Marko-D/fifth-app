@@ -64,14 +64,30 @@ export default BlogReducer.reducer;
 // 	}
 // };
 export const getRssFeed = () => async (dispatch, getState) => {
-  console.log("rss...");
+  // console.log("rss...");
   dispatch(getRequest());
 	return fetch("https://www.emergenetics.com/blog/feed/")
 		.then((response) => response.text())
 		.then((responseData) => rssParser.parse(responseData))
 		.then((rss) => {
 			dispatch(getFeed(rss));
-			console.log(rss);
+			// console.log(rss);
+		})
+		.catch((error) => {
+			dispatch(getError(error.message));
+		});
+};
+
+export const searchRssFeed = (searched) => async (dispatch, getState) => {
+  // console.log("rss...", searched);
+	dispatch(getRequest());
+	
+	return fetch(`https://www.emergenetics.com/feed?s=${searched.term}`)
+		.then((response) => response.text())
+		.then((responseData) => rssParser.parse(responseData))
+		.then((rss) => {
+			dispatch(getFeed(rss));
+			// console.log(rss);
 		})
 		.catch((error) => {
 			dispatch(getError(error.message));

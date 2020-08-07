@@ -42,9 +42,10 @@ const Blog: React.FC<BlogProps> = (props: any): any => {
 	// };
 
 	return (
-		<ConnectionControl refresh={getData}>
+		<>
+			<ConnectionControl refresh={getData}/>
 			<BlogView  onSubmit={onSubmit} onClear={getData}/>
-		</ConnectionControl>
+		</>
 	);
 };
 
@@ -55,7 +56,6 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(getRssFeed());
 		},
 		searchBlog: (term) => {
-			debugger
 			dispatch(searchRssFeed(term));
 		}
 	};

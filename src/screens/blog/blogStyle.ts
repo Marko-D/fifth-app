@@ -39,7 +39,44 @@ const styles = StyleSheet.create({
 		fontFamily: "Nunito-Bold",
 		fontSize: 12,
 		color: Colors.GRAY_DARK
-	}
+	},
+	input: {
+		height: 40,
+		backgroundColor: "#fff",
+		borderColor: "#dbe0e2",
+		borderWidth: 1,
+		paddingHorizontal: 20,
+		paddingVertical: 5,
+		borderRadius: 5,
+		marginBottom: 15,
+		color: "#666",
+	},
+	btnPrimary: {
+		backgroundColor: Colors.WARNING,
+		paddingHorizontal: 10,
+		paddingVertical: 5,
+		borderRadius: 5,
+		marginBottom: 15,
+		height: 40,
+		// width: "50%",
+		// alignSelf: "center"
+	},
+	btnSecondary: {
+		backgroundColor: Colors.PRIMARY,
+		paddingHorizontal: 10,
+		paddingVertical: 5,
+		borderRadius: 5,
+		marginBottom: 15,
+		height: 40,
+		// width: "50%",
+		// alignSelf: "center"
+	},
+	btnPrimaryTxt: {
+		fontSize: 16,
+		fontWeight: "400",
+		color: "#fff",
+		textAlign: "center",
+	},
 });
 
 export default styles;
