@@ -7,6 +7,7 @@ import Dashboard from "../screens/dashboard/dashboard";
 import MyProfile from "../screens/myprofile/myprofile";
 import Blog from "../screens/blog/blogComponent";
 import Persons from "../screens/persons/personsComponent";
+import { IFrame } from "../screens/iFrame/iFrame";
 
 // NESTED 
 import HomeTabNavigator from "../screens/home/homeTabs";
@@ -37,6 +38,8 @@ const getHeaderTitle = (route) => {
 			return "My Profile";
 		case "Persons":
 			return "Persons";
+		case "IFrame":
+			return "IFrame";
 	}
 };
 
@@ -88,7 +91,12 @@ export const PrivateStack: React.FC<PrivateStackProps> = ({}) => {
 				name="Persons"
 				component={Persons}
 				// options={({ route }) => ({	title: route.params.item.name})}
-			/>			
+			/>		
+			<Stack.Screen
+				name="IFrame"
+				component={IFrame}
+				// options={({ route }) => ({	title: route.params.item.name})}
+			/>		
 		</Stack.Navigator>
 	);
 };
