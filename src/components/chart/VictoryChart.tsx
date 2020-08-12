@@ -46,21 +46,21 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
 
 
 
-  useEffect(() => {
-    setGraphicData(mapData()); // Setting the data that we want to display
-  }, []);
+  // useEffect(() => {
+  //   setGraphicData(mapData()); // Setting the data that we want to display
+  // }, []);
 
-  //   useFocusEffect(
-  //   React.useCallback(() => {
-  //     // Do something when the screen is focused
+    useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
       
-  //     setGraphicData(mapData()); // Setting
-  //     return () => {
-  //       // Do something when the screen is unfocused
-  //       setGraphicData(mapData());
-  //     };
-  //   }, [])
-  // )
+      setGraphicData(mapData()); // Setting
+      return () => {
+        // Do something when the screen is unfocused
+        setGraphicData(defaultGraphicData);
+      };
+    }, [])
+  )
 
   return (
     <> 
@@ -118,30 +118,36 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
         fontSize: 18, fill: "#ffffff"
       }
     }}
-    labelComponent={
-      <VictoryTooltip
-        style={{  }}
-        cornerRadius={({ datum }) => datum.x > 6 ? 0 : 20}
-        pointerLength={({ datum }) => datum.y > 0 ? 5 : 20}
-        flyoutStyle={{
-          stroke: ({ datum }) => datum.x === 10 ? "tomato" : "black",
-            fill: Colors.GRAY_DARK,
-        }}
-      />
-    }
-    animate={{  
-      duration: 2000,
-      onLoad: { duration: 1000 } 
-    }}
-    // animate={{duration: 1000}}
+    // labelComponent={
+    //   <VictoryTooltip
+    //     style={{ fill: Colors.GRAY_DARK, }}
+    //     cornerRadius={({ datum }) => datum.x > 6 ? 0 : 20}
+    //     centerOffset={{ x: -50 }}
+    //     pointerLength={({ datum }) => datum.y > 0 ? 5 : 20}
+    //     // pointerOrientation="right"
+    //     flyoutWidth={150}
+    //     flyoutHeight={50}
+    //     flyoutStyle={{
+    //       // stroke: ({ datum }) => datum.x === 10 ? "tomato" : "black",
+    //         fill: Colors.WHITE,
+    //         stroke: Colors.BLACK,
+    //     }}
+    //   />
+    // }
+    // animate={{  
+    //   duration: 2000,
+    //   onLoad: { duration: 1000 } 
+    // }}
+    animate={{duration: 300}}
     data={graphicData}
     padding={{ top: 0, bottom: 0, right:0, left:0 }}
     labelRadius={50}
     standalone={true}
-    width={200}
-    height={200}
+    width={180}
+    height={180}
     theme={VictoryTheme.material}
-    // labels={() => ''}
+    // labels={(num) => console.log(num.slice.value)}
+    labels={(num) => Math.round(num.slice.value)}
     // labelComponent={ <VictoryTooltip flyoutComponent={<VictoryTooltip/>}/> }
     // labelComponent={<VictoryTooltip/>}
     events={[{
@@ -225,40 +231,40 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
 
 const styles = StyleSheet.create({
   container: {
-		flex: 1,
-		flexDirection: "row",
-    position: "relative",
+		// flex: 1,
+		// flexDirection: "row",
+    // position: "relative",
     // paddingVertical: 40,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     marginVertical: 20
   },
-  modalContainer: {
-    width: '100%',
-    position: 'absolute',
-    left: 'auto',
-    zIndex: 10,
-    backgroundColor: 'red',
-    alignItems: 'center'
-  },
-  modal: {
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: Colors.GRAY_MEDIUM,
-    borderStyle: 'solid',
-    padding: 20,
-    width: '70%'
+  // modalContainer: {
+    // width: '100%',
+    // position: 'absolute',
+    // left: 'auto',
+    // zIndex: 10,
+    // backgroundColor: 'red',
+    // alignItems: 'center'
+  // },
+  // modal: {
+  //   backgroundColor: '#fff',
+  //   borderWidth: 1,
+  //   borderColor: Colors.GRAY_MEDIUM,
+  //   borderStyle: 'solid',
+  //   padding: 20,
+  //   width: '70%'
 
-  },
-  modalClose: {
-    padding: 5,
-    position: 'absolute',
-    left: '100%',
-    top: 15,
-    zIndex: 10,
-    backgroundColor: Colors.ALERT
-  },
-  modalCloseText: {
-    color: '#fff',
-  }
+  // },
+  // modalClose: {
+  //   padding: 5,
+  //   position: 'absolute',
+  //   left: '100%',
+  //   top: 15,
+  //   zIndex: 10,
+  //   backgroundColor: Colors.ALERT
+  // },
+  // modalCloseText: {
+  //   color: '#fff',
+  // }
 });
 export default VictoryChart;
