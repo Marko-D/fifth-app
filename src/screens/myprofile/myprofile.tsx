@@ -29,6 +29,8 @@ import { useIsFocused } from "@react-navigation/native";
 import { VictoryChart } from "../../components/chart/VictoryChart";
 import { VictoryChart2 } from "../../components/chart/VictoryChart2";
 import { VictoryChartWrapper } from "../../components/chart/Victory/VictoryChartWrapper";
+
+import PureChart from "react-native-pure-chart";
 import Chart from "../../components/chart/Chart";
 
 const data = [
@@ -109,7 +111,8 @@ const MyProfile: React.FC<any> = ({}) => {
 					{/* <VictoryChart2 data={sampleData} /> */}
 
 					{/* <AppPureChart data={sampleData} render={!!isFocused ? '20' : '0'} /> */}
-					<Chart data={sampleData} />
+					<Chart data={sampleData} chart={<VictoryChart data={sampleData} />} />
+					<Chart data={sampleData} chart={<PureChart data={sampleData} type="pie" />} />
 
 					{/* <CustomChart /> */}
 					{/* <PieChart

@@ -13,6 +13,7 @@ interface IFrameProps {}
 
 export const IFrame: React.FC<IFrameProps> = ({ navigation }: any) => {
 	const url = "https://dan95ut0l5w00.cloudfront.net/jfddaqvn.m2h/story.html?endpoint=https://qa-lrs.emergenetics.com/data/xAPI/&auth=Basic ZDM2ZWFjYTFmNWRjYzg3NjYxOTBmNTdmZDQ3ODE1MTgwY2MzZDdkMzoxYTVlZmI5N2E5NTZmOGM0YWFhMWM1YjVkMDUwYWNkZWNhZjYzNzMy&actor=%7b%22objectType%22%3a%22Agent%22%2c%22name%22%3a%22zorica.jankuloska%40it-labs.com%22%2c%22mbox%22%3a%22mailto%3azorica.jankuloska%40it-labs.com%22%7d&registration=7aff21cb-0208-47f1-9eb4-856b855d9f86";
+	// const url = "https://www.chartjs.org/samples/latest/charts/pie.html";
 
 	// const onNavigationStateChange = (navState) => {
 	// 	if (navState.url.indexOf("https://www.google.com") === 0) {
@@ -49,7 +50,7 @@ export const IFrame: React.FC<IFrameProps> = ({ navigation }: any) => {
 					source={{
 						uri: url,
 					}}
-					// style={{width: 600, height: 200}}
+					// style={{width: 1000, height: 600}}
 				/>
 			</View>
 		</>

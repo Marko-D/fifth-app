@@ -109,7 +109,7 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
       </View>
     </View>
   } */}
- <Svg>
+ {/* <Svg> */}
    <VictoryPie
     colorScale={graphicColor}
     innerRadius={0}
@@ -143,8 +143,8 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
     padding={{ top: 0, bottom: 0, right:0, left:0 }}
     labelRadius={50}
     standalone={true}
-    width={180}
-    height={180}
+    width={200}
+    height={200}
     theme={VictoryTheme.material}
     // labels={(num) => console.log(num.slice.value)}
     labels={(num) => Math.round(num.slice.value)}
@@ -182,7 +182,7 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
     textAnchor="middle"
     style={{ fontSize: 23,fill: 'white'}}
     text="Total Revenue"/> */}
-</Svg>
+{/* </Svg> */}
 </View>
 
 
@@ -230,14 +230,14 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
 
 
 const styles = StyleSheet.create({
-  container: {
+  // container: {
 		// flex: 1,
 		// flexDirection: "row",
     // position: "relative",
     // paddingVertical: 40,
     // backgroundColor: 'red',
-    marginVertical: 20
-  },
+    // marginVertical: 20
+  // },
   // modalContainer: {
     // width: '100%',
     // position: 'absolute',

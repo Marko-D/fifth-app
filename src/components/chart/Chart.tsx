@@ -9,7 +9,7 @@ interface AppPureChartProps {
 	[key: string]: any;
 }
 
-const Chart: React.FC<AppPureChartProps> = ({ data }) => {
+const Chart: React.FC<AppPureChartProps> = ({ data, chart }) => {
 	const [toggle, setToggle] = useState(0);
 	const fadeAnim = useRef(new Animated.Value(toggle)).current;
 	// const switchToggle = () => setToggle(0);
@@ -47,8 +47,7 @@ const Chart: React.FC<AppPureChartProps> = ({ data }) => {
 			</Animated.View>
 
 			<View style={styles.chart}>
-				{/* <PureChart data={data} type="pie" /> */}
-        <VictoryChart data={data} />
+        {chart}
 			</View>
 		</View>
 	);
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
 	barsContainer: {
 		position: "absolute",
 		width: "70%",
-		top: 30,
+		top:22
 		// right: 60
 	},
 	bars: {
@@ -92,7 +91,9 @@ const styles = StyleSheet.create({
 		// position: "absolute",
 		// right: 0,
 		// width: '100%'
+		padding: 0,
 		marginLeft: "auto",
+		// height: 180,
 		// opacity: 0.5
 	},
 });
