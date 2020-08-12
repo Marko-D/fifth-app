@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getRssFeed, searchRssFeed } from "../../store/blog";
 import { useForm, Controller } from "react-hook-form";
 import ConnectionControl from "../../components/connectionControl";
+import { useFocusEffect } from "@react-navigation/native";
 
 interface BlogProps {}
 // interface User {
@@ -30,12 +31,23 @@ const Blog: React.FC<BlogProps> = (props: any): any => {
 		props.getBlogData();
 	};
 
+	// USE THIS TO CALL DATA ON EVERY TAB NAVIGATION 
+	useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      getData()
+      return () => {
+        // Do something when the screen is unfocused
+     
+      };
+    }, [])
+  )
 	
 
 	
-	useEffect(() => {
-		getData()
-	}, []);
+	// useEffect(() => {
+	// 	getData()
+	// }, []);
 
 	// const navRegister = () => {
 	// 	props.navigation.navigate("Register");

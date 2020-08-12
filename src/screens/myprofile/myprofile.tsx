@@ -26,6 +26,9 @@ import AppPureChart from "../../components/chart/AppPureChart";
 import { Colors } from "../../styles";
 import { CustomChart } from "../../components/chart/CustomChart";
 import { useIsFocused } from "@react-navigation/native";
+import { VictoryChart } from "../../components/chart/VictoryChart";
+import { VictoryChart2 } from "../../components/chart/VictoryChart2";
+import { VictoryChartWrapper } from "../../components/chart/Victory/VictoryChartWrapper";
 
 const data = [
 	{
@@ -100,6 +103,10 @@ const MyProfile: React.FC<any> = ({}) => {
 			<SafeAreaView style={styles.container}>
 				<ScrollView style={styles.scrollView}>
 					{/* <Text style={styles.text}>Pure Chart Example</Text> */}
+					{/* <VictoryChartWrapper data={sampleData} /> */}
+					<VictoryChart data={sampleData} />
+					{/* <VictoryChart2 data={sampleData} /> */}
+
 					<AppPureChart data={sampleData} render={!!isFocused ? '20' : '0'} />
 					{/* <CustomChart /> */}
 					{/* <PieChart

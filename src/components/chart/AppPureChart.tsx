@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, Text, StyleSheet, Animated, Easing } from "react-native";
 
 import PureChart from "react-native-pure-chart";
+import { useFocusEffect } from "@react-navigation/native";
 
 interface AppPureChartProps {
 	[key: string]: any;
@@ -9,20 +10,30 @@ interface AppPureChartProps {
 
 const AppPureChart: React.FC<AppPureChartProps> = ({ data }) => {
 	const [toggle, setToggle] = useState(0);
-	const fadeAnim = useRef(new Animated.Value(20)).current;
+	const fadeAnim = useRef(new Animated.Value(toggle)).current;
 	// const switchToggle = () => setToggle(0);
 // 
 	Animated.timing(fadeAnim, {
 		toValue: toggle,
-		duration: 200,
+		duration: 100,
 		easing: Easing.ease,
 		useNativeDriver: true, // To make use of native driver for performance
 	}).start();
 
-	useEffect(() => {
-		setToggle(0);
-  }, []);
+	// useEffect(() => {
+	// 	setToggle(0);
+  // }, []);
   
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     // Do something when the screen is focused
+  //     setToggle(0);
+  //     return () => {
+  //       // Do something when the screen is unfocused
+  //       setToggle(0);
+  //     };
+  //   }, [])
+  // )
 
 	return (
 		<View style={styles.container}>
@@ -45,12 +56,15 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: "row",
-		position: "relative",
+    position: "relative",
+    // paddingVertical: 40,
+    backgroundColor: 'blue',
+    marginVertical: 20
 	},
 	barsContainer: {
 		position: "absolute",
 		width: "70%",
-		top: 25,
+		top: 23,
 		// right: 60
 	},
 	bars: {
