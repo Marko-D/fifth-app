@@ -15,6 +15,7 @@ import HomeTabNavigator from "../screens/home/homeTabs";
 import Constants from "expo-constants";
 import { Colors, Typography } from "../styles";
 import { EMG_ALERT } from "../styles/colors";
+import { LocalizationContext } from "../../App";
 
 interface PrivateStackProps {}
 
@@ -44,6 +45,7 @@ const getHeaderTitle = (route) => {
 };
 
 export const PrivateStack: React.FC<PrivateStackProps> = ({}) => {
+	const { t } = React.useContext(LocalizationContext);
 	return (
 		<Stack.Navigator
 			initialRouteName="Home"
@@ -64,7 +66,7 @@ export const PrivateStack: React.FC<PrivateStackProps> = ({}) => {
 				name="Home"
 				component={HomeTabNavigator}
 				options={({ route }) => ({
-					headerTitle: getHeaderTitle(route),
+					headerTitle: t(`navigation.${route.name.toLowerCase()}`),
 				})}
 			/>
 			<Stack.Screen
