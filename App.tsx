@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useMemo } from "react";
 import MainStack from "./src/routes/mainStack";
 // import "./styles/index";
 import { useFonts } from "@use-expo/font";
@@ -14,12 +14,29 @@ import {PersistGate} from "redux-persist/es/integration/react";
 
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import i18n from "i18n-js";
+import * as Localization from "expo-localization";
+import { init } from "./src/services/IMLocalized";
 
+const initContext = {};
+export const LocalizationContext: any = createContext(initContext);
 
 const App = () => {
 	const store = configureStore();
 	const persistedStore = persistStore(store);
 	const [loading, setLoadig] = useState(true);
+
+	
+	const [locale, setLocale] = useState(Localization.locale);
+  const localizationContext = useMemo(
+    () => ({
+      t: (scope, options) => i18n.t(scope, { locale, ...options }),
+      locale,
+			setLocale,
+			defaultLocale: Localization.locale
+    }),
+    [locale]
+  );
 	
 	
 	// store.dispatch({
@@ -59,6 +76,7 @@ const App = () => {
 		const onAppLoad = async () => {
 			// let hasToken = await AsyncStorageService.getItem("token")
 			loadingApp(false);
+			init();
 			
 			// await Font.loadAsync({
 			// 	Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -91,7 +109,9 @@ const App = () => {
 			return (
 				<Provider store={store}>
 					<PersistGate persistor={persistedStore} loading={null}>
-						<MainStack />
+						<LocalizationContext.Provider value={localizationContext}>
+							<MainStack />
+						</LocalizationContext.Provider>
 					</PersistGate>
 				</Provider>
 			);

@@ -12,6 +12,7 @@ import { About } from "../about/about";
 import Constants from "expo-constants";
 import { Colors, Typography } from "../../styles";
 import { IFrame } from "../iFrame/iFrame";
+import Translation from "../translation/translation";
 
 const Tab = createBottomTabNavigator();
 
@@ -42,6 +43,8 @@ const HomeTabNavigator = () => {
 						iconName = "ios-person";
 					} else if (route.name == "IFrame") {
 						iconName = "ios-airplane";
+					} else if (route.name == "Translation") {
+						iconName = "ios-paper";
 					}
 					return <Ionicons name={iconName} color={color} size={size} />;
 				},
@@ -49,11 +52,12 @@ const HomeTabNavigator = () => {
 		>
 			<Tab.Screen name="Home" component={Home} />
 			<Tab.Screen name="Dashboard" component={Dashboard} />
-			<Tab.Screen name="Blog" component={Blog} />
+			{/* <Tab.Screen name="Blog" component={Blog} />
 			<Tab.Screen name="About" component={About} />
 			<Tab.Screen name="MyProfile" component={MyProfile} />
 			<Tab.Screen name="Persons" component={Persons} />
-			<Tab.Screen name="IFrame" component={IFrame} />
+			<Tab.Screen name="IFrame" component={IFrame} /> */}
+			<Tab.Screen name="Translation" component={Translation} />
 		</Tab.Navigator>
 	);
 };
