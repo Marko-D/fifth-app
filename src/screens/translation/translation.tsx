@@ -1,32 +1,36 @@
 import React, { useContext } from "react";
-import { IMLocalized, init } from "../../services/IMLocalized";
 import { View, StyleSheet, Text, Button } from "react-native";
 import { LocalizationContext } from "../../../App";
+import Translate from "../../components/translate";
 
-// import mainStack from '../../routes/mainStack';
 interface TranslationProps {}
 
 const Translation: React.FC<TranslationProps> = ({}) => {
-	const { t, locale, setLocale, defaultLocale } = useContext<any>(
-		LocalizationContext
-	);
+	const { t, locale, setLocale, defaultLocale } = useContext<any>(LocalizationContext);
 
-	//   init();
+
+
+    const nameList = ["Marta", "Stefanija", "Marko", "Ivona"];
+
+    const random = Math.floor(Math.random() * nameList.length);
+    console.log(random, nameList[random]);
+
+
 	return (
-		//   <View style={styles.container} >
-		//       <Text style={styles.welcomeText} >
-		//           {IMLocalized('welcome')}
-		//       </Text>
-		//   </View>
 		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-			<Text>Current locale: {locale}. </Text>
-			<Text>
+			<Text style={{marginBottom: 20, fontSize: 20}}>Current locale: {locale}. </Text>
+			{/* <Text>
 				{locale !== "en-US" && locale !== "fr-FR"
 					? 'Translations will fall back to "en" because none available'
 					: null}
-			</Text>
+			</Text> */}
 			{/* <Text>{IMLocalized('welcome')}</Text> */}
-			<Text>{t("welcome", { someValue: Date.now() })}</Text>
+
+
+			{/* <Text style={{marginBottom: 20}}>{t("welcome", { someValue: Date.now() })}</Text> */}
+
+            <Translate label={"myNameIs"} variable={{ value: nameList[random] }}/>
+
 			{locale === "en-US" ? (
 				<Button title="Switch to French" onPress={() => setLocale("fr-FR")} />
 			) : (

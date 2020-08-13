@@ -1,3 +1,14 @@
 {
-  "welcome": "Bienvenue dans le didacticiel de traduction"
+  "navigation": {
+    "home": "Home FR",
+    "dashboard": "Dashboard FR",
+    "blog": "Blog FR",
+    "about": "About FR",
+    "myProfile": "MyProfile FR",
+    "persons": "Persons FR",
+    "iFrame": "IFrame FR",
+    "translation": "Translation FR"
+  },
+  "welcome": "Bienvenue dans le didacticiel de traduction",
+  "myNameIs": "Je m'appelle {{variable}}"
 }

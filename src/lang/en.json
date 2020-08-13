@@ -1,3 +1,14 @@
 {
-  "welcome": "Welcome to translation tutorial"
+  "navigation": {
+    "home": "Home EN",
+    "dashboard": "Dashboard EN",
+    "blog": "Blog EN",
+    "about": "About EN",
+    "myProfile": "MyProfile EN",
+    "persons": "Persons EN",
+    "iFrame": "IFrame EN",
+    "translation": "Translation EN"
+  },
+  "welcome": "Welcome to translation tutorial",
+  "myNameIs": "My Name is {{variable}}"
 }
