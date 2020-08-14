@@ -17,9 +17,13 @@ import { Ionicons } from '@expo/vector-icons';
 import i18n from "i18n-js";
 import * as Localization from "expo-localization";
 import { init } from "./src/services/IMLocalized";
+import axios from "axios";
+import translationService from "./src/screens/translation/translationService";
+import Toast from 'react-native-simple-toast';
+import AppLocalization from "./src/services/localization";
 
 const initContext = {};
-export const LocalizationContext: any = createContext(initContext);
+// export const LocalizationContext: any = createContext(initContext);
 
 const App = () => {
 	const store = configureStore();
@@ -28,15 +32,15 @@ const App = () => {
 
 	
 	const [locale, setLocale] = useState(Localization.locale);
-  const localizationContext = useMemo(
-    () => ({
-      t: (scope, options) => i18n.t(scope, { locale, ...options }),
-      locale,
-			setLocale,
-			defaultLocale: Localization.locale
-    }),
-    [locale]
-  );
+  // const localizationContext = useMemo(
+  //   () => ({
+  //     t: (scope, options) => i18n.t(scope, { locale, ...options }),
+  //     locale,
+	// 		setLocale,
+	// 		defaultLocale: Localization.locale
+  //   }),
+  //   [locale]
+  // );
 	
 	
 	// store.dispatch({
@@ -70,13 +74,29 @@ const App = () => {
 		...Ionicons.font,
 	});
 
+
+	// const getLanguages = async () => {
+	// 	try {
+	// 		let localeToLowerCase = locale.toLowerCase();
+	// 		let lang =  await translationService.getLanguages(localeToLowerCase);
+	// 		await AsyncStorageService.setItem('appLanguage', localeToLowerCase);
+	// 		await AsyncStorageService.setItem(locale, JSON.stringify(lang.data));
+	// 		console.log(lang.data)
+	// 	} catch (error) {
+	// 		// Toast.show(error);
+	// 		console.log('errorerrorerrorerrorerror',error)
+	// 	}
+	// }
+	
+
 	// How to use async functyion in usEffect hook
 	useEffect(() => {
 		// Create an scoped async function in the hook
 		const onAppLoad = async () => {
 			// let hasToken = await AsyncStorageService.getItem("token")
 			loadingApp(false);
-			init();
+			// init();
+			// getLanguages();
 			
 			// await Font.loadAsync({
 			// 	Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -109,9 +129,11 @@ const App = () => {
 			return (
 				<Provider store={store}>
 					<PersistGate persistor={persistedStore} loading={null}>
-						<LocalizationContext.Provider value={localizationContext}>
-							<MainStack />
-						</LocalizationContext.Provider>
+						{/* <LocalizationContext.Provider value={localizationContext}> */}
+							<AppLocalization>
+								<MainStack />
+							</AppLocalization>
+						{/* </LocalizationContext.Provider> */}
 					</PersistGate>
 				</Provider>
 			);

@@ -15,7 +15,8 @@ import HomeTabNavigator from "../screens/home/homeTabs";
 import Constants from "expo-constants";
 import { Colors, Typography } from "../styles";
 import { EMG_ALERT } from "../styles/colors";
-import { LocalizationContext } from "../../App";
+import { LocalizationContext } from "../services/localization";
+
 
 interface PrivateStackProps {}
 

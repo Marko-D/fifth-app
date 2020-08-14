@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, Text, Button } from "react-native";
-import { LocalizationContext } from "../../App";
+import { LocalizationContext } from "../services/localization";
+
 
 interface TranslateProps {
   label: string, 

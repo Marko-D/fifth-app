@@ -13,7 +13,8 @@ import Constants from "expo-constants";
 import { Colors, Typography } from "../../styles";
 import { IFrame } from "../iFrame/iFrame";
 import Translation from "../translation/translation";
-import { LocalizationContext } from "../../../App";
+import { LocalizationContext } from "../../services/localization";
+
 
 const Tab = createBottomTabNavigator();
 

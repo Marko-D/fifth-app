@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, Text, Button } from "react-native";
-import { LocalizationContext } from "../../../App";
 import Translate from "../../components/translate";
+import { LocalizationContext } from "../../services/localization";
 
 interface TranslationProps {}
 
@@ -29,12 +29,16 @@ const Translation: React.FC<TranslationProps> = ({}) => {
 
 			{/* <Text style={{marginBottom: 20}}>{t("welcome", { someValue: Date.now() })}</Text> */}
 
-            <Translate label={"myNameIs"} variable={{ value: nameList[random] }}/>
+            <Translate label={"myNameIs.test"} variable={{ value: nameList[random] }}/>
+            <Translate label={"courses.materials"}/>
+						<Text style={{ marginBottom: 20 }}>
+							{locale}
+						</Text>
 
-			{locale === "en-US" ? (
-				<Button title="Switch to French" onPress={() => setLocale("fr-FR")} />
+			{locale === "en-us" ? (
+				<Button title="Switch to Spanish" onPress={() => setLocale("es-es")} />
 			) : (
-				<Button title="Switch to English" onPress={() => setLocale("en-US")} />
+				<Button title="Switch to English" onPress={() => setLocale("en-us")} />
 			)}
 
 			<Button title="Reset Default" onPress={() => setLocale(defaultLocale)} />
