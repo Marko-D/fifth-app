@@ -95,6 +95,7 @@ const App = () => {
 		const onAppLoad = async () => {
 			// let hasToken = await AsyncStorageService.getItem("token")
 			loadingApp(false);
+			
 			// init();
 			// getLanguages();
 			

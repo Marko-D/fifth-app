@@ -1,4 +1,4 @@
-import React, { useState, useMemo, createContext } from 'react'
+import React, { useState, useMemo, createContext, useEffect } from 'react'
 import AsyncStorage from '@react-native-community/async-storage';
 import i18n from "i18n-js";
 import * as Localization from "expo-localization";
@@ -41,6 +41,8 @@ const languages = ['en-us', 'es-es'];
 const stores: [] = []
 
 const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
+
+
   const [locale, setLocale] = useState(DEFAULT_LANGUAGE);
   const locContext = useMemo(
     () => ({
@@ -52,7 +54,7 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     [locale]
   );
 
-  const getKeysData = async(keys) => {
+  const getLanguages = async(keys) => {
     let obj = {};
     // const stores = await AsyncStorage.multiGet(keys);
     // return stores.map(([key, value]) => ({[key]: value}))
@@ -89,7 +91,7 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     let parsedLang = {};
 
     try {
-      parsedLang = await getKeysData(languages) 
+      parsedLang = await getLanguages(languages) 
     } catch (error) {
       console.log(error)
     }
@@ -116,9 +118,11 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     i18n.fallbacks = true;
   };
 
-  setLanguages();
-  initializeAppLanguage();
 
+  // useEffect(() => {
+    setLanguages();
+    initializeAppLanguage();
+  // }, [])
 
   return (
     <LocalizationContext.Provider value={locContext}>

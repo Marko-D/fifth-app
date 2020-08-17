@@ -15,11 +15,19 @@
 //  })
 
  import axios from "axios";
-
+	let randomNum = new Date().getTime();
 class TranslationService {
+	
+
 	language(lang): Promise<any> {
-		return axios.get(`https://d5u4v8r8pm121.cloudfront.net/translations/mobile/${lang}/all.lang.json`);
+		return axios.get(`https://d5u4v8r8pm121.cloudfront.net/translations/mobile/${lang}/all.lang.json?ver=${randomNum}`);
 	}
+	
+	test(): Promise<any> {
+		return axios.get(`https://tools.learningcontainer.com/sample-json.json`);
+	}
+	
+
 
 
 	// loginUser = () => {

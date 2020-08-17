@@ -29,8 +29,8 @@ const Translation: React.FC<TranslationProps> = ({}) => {
 
 			{/* <Text style={{marginBottom: 20}}>{t("welcome", { someValue: Date.now() })}</Text> */}
 
-            <Translate label={"myNameIs.test"} variable={{ value: nameList[random] }}/>
-            <Translate label={"courses.materials"}/>
+            <Translate label={"courseType"} variable={{ value: nameList[random] }}/>
+            <Translate label={"courseSubTypeIsRequired"}/>
 						<Text style={{ marginBottom: 20 }}>
 							{locale}
 						</Text>
