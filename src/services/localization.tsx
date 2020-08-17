@@ -22,7 +22,7 @@ interface AppLocalizationProps {
 // });
 
 const DEFAULT_LANGUAGE = 'en-us';
-const APP_LANGUAGE = 'appLanguage';
+export const APP_LANGUAGE = 'appLanguage';
 const initContext = {};
 
 export const LocalizationContext: any = createContext(initContext);
@@ -53,6 +53,17 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     }),
     [locale]
   );
+  
+  const setLanguages = async () => {
+		try {
+      for (const item of languages) {
+        let lang =  await translationService.language(item);
+        await AsyncStorageService.setItem(item, JSON.stringify(lang.data));
+      }
+		} catch (error) {
+			console.log('errorerrorerrorerrorerror',error)
+		}
+	}
 
   const getLanguages = async(keys) => {
     let obj = {};
@@ -71,37 +82,26 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
   //   return stores.map(([key, value]) => ({[key]: value}))
   // }
   
-
-  const setLanguages = async () => {
-		try {
-      for (const item of languages) {
-        let lang =  await translationService.language(item);
-        await AsyncStorageService.setItem(item, JSON.stringify(lang.data));
-      }
-		} catch (error) {
-			console.log('errorerrorerrorerrorerror',error)
-		}
-	}
-
   const initializeAppLanguage = async () => {
     // const currentLanguage = await AsyncStorage.getItem(APP_LANGUAGE);
 
     let localeLanguageTag = Localization.locale.toLowerCase();
     let isRTL = Localization.isRTL;
     let parsedLang = {};
-
+alert(localeLanguageTag)
     try {
-      parsedLang = await getLanguages(languages) 
+      await setLanguages();
+      parsedLang = await getLanguages(languages);
     } catch (error) {
       console.log(error)
     }
     
  
-    // if (currentLanguage) {
-    //   setLocale(currentLanguage);
-    // } else {
-    //   setLocale(DEFAULT_LANGUAGE);
-    // }
+    // // if (currentLanguage) {
+      // setLocale(localeLanguageTag);
+    // // } else {
+    // //   setLocale(DEFAULT_LANGUAGE);
+    // // }
       
     I18nManager.forceRTL(isRTL);
 
@@ -120,8 +120,9 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
 
 
   // useEffect(() => {
-    setLanguages();
-    initializeAppLanguage();
+    // setTimeout(() => {
+      initializeAppLanguage();      
+    // }, 5000);
   // }, [])
 
   return (

@@ -10,6 +10,7 @@ import AuthReducer from "./auth";
 import DashboardReducer from "./dashboard";
 import BlogReducer from "./blog";
 import PersonsReducer from "./persons";
+import InitializeReducer from "./initialize";
 
 //Custom middleware
 // import Logger from "./middleware/logger";
@@ -24,7 +25,9 @@ const reducer = combineReducers({
 	auth: AuthReducer,
 	dashboard: DashboardReducer,
 	blog: BlogReducer,
-	persons: PersonsReducer
+	persons: PersonsReducer,
+	initialize: InitializeReducer,
+
 });
 
 const persistConfig = {
@@ -43,7 +46,7 @@ export default () =>
 		middleware: [
 			// ...getDefaultMiddleware(),
 			thunk,
-			logger,
+			// logger,
       // Logger(Environment),
 			Toastify,
 			Api

@@ -16,6 +16,7 @@ import styles from "./loginStyle";
 import Environment from "../../../active.env";
 import Loader from "../../components/loader";
 import { useForm, Controller } from "react-hook-form";
+import { AsyncStorageService } from "../../core/services/asyncStorageService";
 
 interface LoginViewProps {
 	navigateToRegister: any;
@@ -33,6 +34,10 @@ export const LoginView: React.FC<LoginViewProps> = (props: any): any => {
 	const { control, handleSubmit, errors } = useForm<LoginForm>();
 	const onSubmit = (data) => props.login(data);
 
+	const clearStorage = async () => {
+		await AsyncStorageService.clearAll()
+	}
+	
 	return (
 		<ImageBackground
 			source={require("../../../assets/images/bg.jpg")}
@@ -79,9 +84,12 @@ export const LoginView: React.FC<LoginViewProps> = (props: any): any => {
 				<TouchableOpacity style={styles.btnPrimary} onPress={handleSubmit(onSubmit)}>
 					<Text style={styles.btnPrimaryTxt}>Login</Text>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.btnLink}
-					// onPress={handlePress}
-				>
+				<TouchableOpacity style={styles.btnLink}>
+					<Text style={styles.btnPrimaryTxt} onPress={clearStorage}>Clear AsyncStorage</Text>
+				</TouchableOpacity>
+					
+				
+				<TouchableOpacity style={styles.btnLink}>
 					<Text style={styles.btnLinkTxt} onPress={props.navigateToRegister}>
 						Register
 					</Text>
