@@ -21,6 +21,7 @@ import axios from "axios";
 import translationService from "./src/screens/translation/translationService";
 import Toast from 'react-native-simple-toast';
 import AppLocalization from "./src/services/localization";
+import { Languages } from "./src/services/languagesList";
 
 const initContext = {};
 // export const LocalizationContext: any = createContext(initContext);
@@ -31,7 +32,7 @@ const App = () => {
 	const [loading, setLoadig] = useState(true);
 
 	
-	const [locale, setLocale] = useState(Localization.locale);
+	const [languagesList, setLanguagesList] = useState({});
   // const localizationContext = useMemo(
   //   () => ({
   //     t: (scope, options) => i18n.t(scope, { locale, ...options }),
@@ -87,6 +88,28 @@ const App = () => {
 	// 		console.log('errorerrorerrorerrorerror',error)
 	// 	}
 	// }
+
+	const setLanguages = async () => {
+		try {
+      for (const item of Languages) {
+        let lang =  await translationService.language(item.val);
+        await AsyncStorageService.setItem(item.val, JSON.stringify(lang.data));
+      }
+		} catch (error) {
+			console.log('Error Setting Language', error)
+		}
+	}
+
+  const getLanguages = async(languages) => {
+    let obj = {};
+
+    for (const item of languages) {
+      let lang = await AsyncStorageService.getItem(item.val);
+      obj = Object.assign(obj, {[item.val]: JSON.parse(lang)})
+    }
+
+    return obj
+  }
 	
 
 	// How to use async functyion in usEffect hook
@@ -95,7 +118,9 @@ const App = () => {
 		const onAppLoad = async () => {
 			// let hasToken = await AsyncStorageService.getItem("token")
 			loadingApp(false);
-			
+			await setLanguages()
+			let list = await getLanguages(Languages)
+			setLanguagesList(list)
 			// init();
 			// getLanguages();
 			
@@ -131,7 +156,7 @@ const App = () => {
 				<Provider store={store}>
 					<PersistGate persistor={persistedStore} loading={null}>
 						{/* <LocalizationContext.Provider value={localizationContext}> */}
-							<AppLocalization>
+							<AppLocalization languagesList={languagesList}>
 								<MainStack />
 							</AppLocalization>
 						{/* </LocalizationContext.Provider> */}

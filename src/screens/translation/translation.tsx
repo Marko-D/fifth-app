@@ -38,9 +38,9 @@ const Translation: React.FC<TranslationProps> = ({}) => {
 			<Text style={{ marginBottom: 20, fontSize: 20 }}>
 				Current locale: {locale}
 			</Text>
-			<Text style={{ marginBottom: 20, fontSize: 20 }}>
+			{/* <Text style={{ marginBottom: 20, fontSize: 20 }}>
 				Changed locale: {changeLocale}
-			</Text>
+			</Text> */}
 			{/* <Text>
 				{locale !== "en-US" && locale !== "fr-FR"
 					? 'Translations will fall back to "en" because none available'
@@ -52,9 +52,9 @@ const Translation: React.FC<TranslationProps> = ({}) => {
 
 			<Translate label={"courseType"} variable={{ value: nameList[random] }}/>
 			<Translate label={"courseSubTypeIsRequired"}/>
-			<Text style={{ marginBottom: 20 }}>
+			{/* <Text style={{ marginBottom: 20 }}>
 				{locale}
-			</Text>
+			</Text> */}
 
 			{locale === "en-us" ? (
 				<Button title="Switch to Spanish" onPress={() => change("es-es")} />

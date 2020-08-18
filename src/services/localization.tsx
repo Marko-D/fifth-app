@@ -11,7 +11,7 @@ import translationService from '../screens/translation/translationService';
 import { AsyncStorageService } from '../core/services/asyncStorageService';
 
 interface AppLocalizationProps {
-
+  [key: string]: any
 }
 // interface Locale {
 //   [key: string]: any, 
@@ -41,21 +41,12 @@ const fr = { ...translationGetters["fr-FR"]()};
 const es = { ...translationGetters["es-US"]()};
 
 // const languages = ['en-us', 'es-es'];
-export const languages = [
-  {
-    name: 'English',
-    val: 'en-us'
-  }, 	
-  {
-    name: 'Spanish',
-    val: 'es-es'
-  }, 
-];
+
 const stores: [] = []
 
 
-const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
-
+const AppLocalization: React.FC<AppLocalizationProps> = ({children, languagesList}) => {
+  console.log('AppLocalization -------', )
 
   const [locale, setLocale] = useState<any>();
   // const [user, setUser] = useState<IUser>({name: 'Jon'});
@@ -72,27 +63,27 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     [locale]
   );
   
-  const setLanguages = async () => {
-		try {
-      for (const item of languages) {
-        let lang =  await translationService.language(item.val);
-        await AsyncStorageService.setItem(item.val, JSON.stringify(lang.data));
-      }
-		} catch (error) {
-			console.log('Error Setting Language', error)
-		}
-	}
+  // const setLanguages = async () => {
+	// 	try {
+  //     for (const item of languages) {
+  //       let lang =  await translationService.language(item.val);
+  //       await AsyncStorageService.setItem(item.val, JSON.stringify(lang.data));
+  //     }
+	// 	} catch (error) {
+	// 		console.log('Error Setting Language', error)
+	// 	}
+	// }
 
-  const getLanguages = async(languages) => {
-    let obj = {};
+  // const getLanguages = async(languages) => {
+  //   let obj = {};
 
-    for (const item of languages) {
-      let lang = await AsyncStorageService.getItem(item.val);
-      obj = Object.assign(obj, {[item.val]: JSON.parse(lang)})
-    }
+  //   for (const item of languages) {
+  //     let lang = await AsyncStorageService.getItem(item.val);
+  //     obj = Object.assign(obj, {[item.val]: JSON.parse(lang)})
+  //   }
 
-    return obj
-  }
+  //   return obj
+  // }
   
   const initializeAppLanguage = async () => {
     // const currentLanguage = await AsyncStorage.getItem(APP_LANGUAGE);
@@ -101,8 +92,8 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     let isRTL = Localization.isRTL;
     let parsedLang = {};
     try {
-      await setLanguages();
-      parsedLang = await getLanguages(languages);
+      // await setLanguages();
+      parsedLang = await languagesList;
     } catch (error) {
       console.log(error)
     }
@@ -123,7 +114,7 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     // i18n.translations = {
     //   [localeLanguageTag]: parsedLang[localeLanguageTag],
     // };
-    console.log('i18n.translations', i18n.translations)
+    
 
 
     i18n.locale = localeLanguageTag;
