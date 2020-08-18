@@ -75,7 +75,7 @@ const es = { ...translationGetters["es-US"]()};
 
 
 export const init = () => {
-	let localeLanguageTag = Localization.locale;
+	// let localeLanguageTag = Localization.locale;
 	let isRTL = Localization.isRTL;
 	// IMLocalized.cache.clear();
 	// update layout direction

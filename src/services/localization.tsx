@@ -13,6 +13,9 @@ import { AsyncStorageService } from '../core/services/asyncStorageService';
 interface AppLocalizationProps {
 
 }
+// interface Locale {
+//   [key: string]: any, 
+// }
 
 // export const LocalizationContext = createContext({ // 5
 //   translations,
@@ -37,18 +40,33 @@ const en = { ...translationGetters["en-US"]()};
 const fr = { ...translationGetters["fr-FR"]()};
 const es = { ...translationGetters["es-US"]()};
 
-const languages = ['en-us', 'es-es'];
+// const languages = ['en-us', 'es-es'];
+export const languages = [
+  {
+    name: 'English',
+    val: 'en-us'
+  }, 	
+  {
+    name: 'Spanish',
+    val: 'es-es'
+  }, 
+];
 const stores: [] = []
+
 
 const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
 
 
-  const [locale, setLocale] = useState(DEFAULT_LANGUAGE);
+  const [locale, setLocale] = useState<any>();
+  // const [user, setUser] = useState<IUser>({name: 'Jon'});
+  const [changeLocale, setChangeLocale] = useState<any>();
   const locContext = useMemo(
     () => ({
       t: (scope, options) => i18n.t(scope, { locale, ...options }),
       locale,
-			setLocale,
+      setLocale,
+      changeLocale,
+      setChangeLocale,
 			defaultLocale: DEFAULT_LANGUAGE
     }),
     [locale]
@@ -57,30 +75,24 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
   const setLanguages = async () => {
 		try {
       for (const item of languages) {
-        let lang =  await translationService.language(item);
-        await AsyncStorageService.setItem(item, JSON.stringify(lang.data));
+        let lang =  await translationService.language(item.val);
+        await AsyncStorageService.setItem(item.val, JSON.stringify(lang.data));
       }
 		} catch (error) {
-			console.log('errorerrorerrorerrorerror',error)
+			console.log('Error Setting Language', error)
 		}
 	}
 
-  const getLanguages = async(keys) => {
+  const getLanguages = async(languages) => {
     let obj = {};
-    // const stores = await AsyncStorage.multiGet(keys);
-    // return stores.map(([key, value]) => ({[key]: value}))
-    for (const key of keys) {
-      let lang = await AsyncStorageService.getItem(key);
-      obj = Object.assign(obj, {[key]: JSON.parse(lang)})
+
+    for (const item of languages) {
+      let lang = await AsyncStorageService.getItem(item.val);
+      obj = Object.assign(obj, {[item.val]: JSON.parse(lang)})
     }
 
     return obj
   }
-
-  // const setKeysData = async(keys) => {
-  //   const stores = await AsyncStorage.multiSet(keys);
-  //   return stores.map(([key, value]) => ({[key]: value}))
-  // }
   
   const initializeAppLanguage = async () => {
     // const currentLanguage = await AsyncStorage.getItem(APP_LANGUAGE);
@@ -88,7 +100,6 @@ const AppLocalization: React.FC<AppLocalizationProps> = ({children}) => {
     let localeLanguageTag = Localization.locale.toLowerCase();
     let isRTL = Localization.isRTL;
     let parsedLang = {};
-alert(localeLanguageTag)
     try {
       await setLanguages();
       parsedLang = await getLanguages(languages);
@@ -96,13 +107,15 @@ alert(localeLanguageTag)
       console.log(error)
     }
     
- 
-    // // if (currentLanguage) {
-      // setLocale(localeLanguageTag);
-    // // } else {
-    // //   setLocale(DEFAULT_LANGUAGE);
-    // // }
+    
+    if (changeLocale) {
+      setLocale(changeLocale);
+    } else {
+      setLocale(localeLanguageTag);
+    }
+    // alert(`Localization ${localeLanguageTag}`)
       
+    i18n.defaultLocale = DEFAULT_LANGUAGE;
     I18nManager.forceRTL(isRTL);
 
     // i18n.translations = { fr, en, es };
@@ -116,6 +129,10 @@ alert(localeLanguageTag)
     i18n.locale = localeLanguageTag;
     // When a value is missing from a language it'll fallback to another language with the key present.
     i18n.fallbacks = true;
+    // i18n.fallbacks = {
+    //   fr: ["de", "en"],
+    //   'MK-MK': "en-us"
+    // } 
   };
 
 

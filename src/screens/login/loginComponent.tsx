@@ -7,6 +7,7 @@ import { AsyncStorageService } from "../../core/services/asyncStorageService";
 import { connect } from 'react-redux'
 // import { tokenAdded } from "../../store/auth";
 import { login } from "../../store/auth";
+import { LocalizationContext } from "../../services/localization";
 // import {login, logout} from './store/user'
 
 interface LoginProps {}
@@ -20,7 +21,9 @@ interface LoginProps {}
 // 	data: User;
 // }
 const Login: React.FC<LoginProps> = (props: any): any => {
-	
+	const { t, locale, setLocale, defaultLocale } = useContext<any>(
+		LocalizationContext
+	);
 	// const {state, setState} = useContext<any>(AuthContext);
 
 	const navRegister = () => {
@@ -119,7 +122,7 @@ const Login: React.FC<LoginProps> = (props: any): any => {
 	// }
 
 	return (
-		<LoginView title='Titleee Login' login={handleLogin} navigateToRegister={navRegister} />
+		<LoginView title={`Login ${locale}`} login={handleLogin} navigateToRegister={navRegister} />
 	);
 };
 
