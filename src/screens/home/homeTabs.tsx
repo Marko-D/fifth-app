@@ -15,6 +15,7 @@ import { IFrame } from "../iFrame/iFrame";
 import Translation from "../translation/translation";
 import { LocalizationContext } from "../../services/localization";
 import News from "../news/news";
+import Onboarding from "../onboarding/onboarding";
 
 
 
@@ -44,7 +45,9 @@ const HomeTabNavigator = () => {
 					} else if (route.name == "About") {
 						iconName = "ios-book";
 					} else if (route.name == "News") {
-						iconName = "ios-clipboard";
+						iconName = "ios-bulb";
+					} else if (route.name == "Onboarding") {
+						iconName = "ios-arrow-up";
 					} else if (route.name == "MyProfile") {
 						iconName = "ios-settings";
 					} else if (route.name == "Persons") {
@@ -63,6 +66,7 @@ const HomeTabNavigator = () => {
 			<Tab.Screen name="Blog" component={Blog} options={{ title: t('navigation.blog') }}/>
 			<Tab.Screen name="About" component={About} options={{ title: t('navigation.about') }}/>
 			<Tab.Screen name="News" component={News} options={{ title: t('navigation.news') }}/>
+			<Tab.Screen name="Onboarding" component={Onboarding} options={{ title: t('navigation.onboarding') }}/>
 			{/* <Tab.Screen name="MyProfile" component={MyProfile} options={{ title: t('navigation.myProfile') }}/> */}
 			{/* <Tab.Screen name="Persons" component={Persons} options={{ title: t('navigation.persons') }}/> */}
 			{/* <Tab.Screen name="IFrame" component={IFrame} options={{ title: t('navigation.iFrame') }}/> */}
