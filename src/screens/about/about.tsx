@@ -7,10 +7,18 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 } from "react-native";
+import * as WebBrowser from 'expo-web-browser';
 
 interface AboutProps {}
 
 export const About: React.FC<AboutProps> = ({ navigation }: any) => {
+	const [result, setResult] = useState(null);
+
+  const _handlePressButtonAsync = async () => {
+    let result:any = await WebBrowser.openBrowserAsync('http://www.mtsp.gov.mk/content/pdf/programi/2019/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D0%BD%D0%B0%20%D0%BD%D0%B5%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BD%D0%B8%20%D0%B4%D0%B5%D0%BD%D0%BE%D0%B2%D0%B8%20%D0%B7%D0%B0%202020%20%D0%B3%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0.pdf');
+    setResult(result);
+  };
+	
 	const [items, setItems] = useState([
 		{
 			id: 0,
@@ -60,7 +68,12 @@ export const About: React.FC<AboutProps> = ({ navigation }: any) => {
 				<Button title="go back" onPress={handlePress} />
 			</View>
 			<View style={styles.container}>
-				<FlatList
+
+		
+			<Button title="Open WebBrowser" onPress={_handlePressButtonAsync} />
+			<Text>{result && JSON.stringify(result)}</Text>
+	
+				{/* <FlatList
 					data={items}
 					keyExtractor={item => item.id.toString()}
 					renderItem={({ item }) => (
@@ -72,7 +85,7 @@ export const About: React.FC<AboutProps> = ({ navigation }: any) => {
 
 				<TouchableOpacity style={styles.button} onPress={addItem}>
 					<Text style={styles.buttonTxt}>Add New</Text>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 			</View>
 		</>
 	);
