@@ -47,7 +47,7 @@ export const BlogView: React.FC<BlogViewProps> = (props: any): any => {
 
 	const onShare = async (item) => {
     try {
-			debugger
+
       const result = await Share.share({
 				message: `Emergenetics blog post: ${item.links[0].url}`,
         title: item.title,

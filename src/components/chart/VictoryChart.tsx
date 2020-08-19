@@ -165,7 +165,6 @@ export const VictoryChart: React.FC<VictoryChartProps> = ({data}) => {
             {
               target: "labels",
               mutation: (props) => {
-                debugger
                 console.log('text: '+props);
                 // Alert.alert(props.text);
                 setModal(true)

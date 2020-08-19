@@ -20,7 +20,7 @@ const Api = ({ dispatch, getState }) => next => async action => {
     const token = getState().auth.token;
     const defaultOptions = {
       headers: {
-        Authorization: token ? `JWT ${token}` : '',
+        "Authorization": token ? `JWT ${token}` : '',
         "Accept": "application/json, text/plain, */*",
         "Content-Type": "application/json; charset=utf-8"
       }
@@ -29,7 +29,7 @@ const Api = ({ dispatch, getState }) => next => async action => {
     const options = {
       ...defaultOptions,
       ...data,
-      ...params
+      params
     };
 
     const response = await axios[method](url, options);

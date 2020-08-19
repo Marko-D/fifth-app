@@ -14,6 +14,8 @@ import { Colors, Typography } from "../../styles";
 import { IFrame } from "../iFrame/iFrame";
 import Translation from "../translation/translation";
 import { LocalizationContext } from "../../services/localization";
+import News from "../news/news";
+
 
 
 const Tab = createBottomTabNavigator();
@@ -41,6 +43,8 @@ const HomeTabNavigator = () => {
 						iconName = "ios-happy";
 					} else if (route.name == "About") {
 						iconName = "ios-book";
+					} else if (route.name == "News") {
+						iconName = "ios-clipboard";
 					} else if (route.name == "MyProfile") {
 						iconName = "ios-settings";
 					} else if (route.name == "Persons") {
@@ -56,11 +60,12 @@ const HomeTabNavigator = () => {
 		>
 			<Tab.Screen name="Home" component={Home}  options={{ title: t('navigation.home') }}/>
 			<Tab.Screen name="Dashboard" component={Dashboard} options={{ title: t('navigation.dashboard') }}/>
-			{/* <Tab.Screen name="Blog" component={Blog} options={{ title: t('navigation.blog') }}/>
+			<Tab.Screen name="Blog" component={Blog} options={{ title: t('navigation.blog') }}/>
 			<Tab.Screen name="About" component={About} options={{ title: t('navigation.about') }}/>
-			<Tab.Screen name="MyProfile" component={MyProfile} options={{ title: t('navigation.myProfile') }}/>
-			<Tab.Screen name="Persons" component={Persons} options={{ title: t('navigation.persons') }}/>
-			<Tab.Screen name="IFrame" component={IFrame} options={{ title: t('navigation.iFrame') }}/> */}
+			<Tab.Screen name="News" component={News} options={{ title: t('navigation.news') }}/>
+			{/* <Tab.Screen name="MyProfile" component={MyProfile} options={{ title: t('navigation.myProfile') }}/> */}
+			{/* <Tab.Screen name="Persons" component={Persons} options={{ title: t('navigation.persons') }}/> */}
+			{/* <Tab.Screen name="IFrame" component={IFrame} options={{ title: t('navigation.iFrame') }}/> */}
 			<Tab.Screen name="Translation" component={Translation} options={{ title: t('navigation.translation') }} />
 		</Tab.Navigator>
 	);
