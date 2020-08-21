@@ -47,7 +47,7 @@ const MainStack: React.FC<any> = (props) => {
 	return (
 		<NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : MyTheme}>
 			{/* <ActivityIndicator /> */}
-			{isCurrentUserLogged ? <PrivateStack /> : <PublicStack />}
+			{!isCurrentUserLogged ? <PrivateStack /> : <PublicStack />}
 		</NavigationContainer>
 	);
 };

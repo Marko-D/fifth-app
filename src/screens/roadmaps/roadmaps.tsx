@@ -10,6 +10,7 @@ import { Step } from '../../components/stepper/step';
 import { Upload } from '../../components/stepper/upload/upload';
 import { ActionStep } from '../../components/stepper/actionStep/actionStep';
 import { ViewActionStep } from '../../components/stepper/viewActionStep/viewActionStep';
+import { Download } from '../../components/stepper/download/download';
 
 interface RoadmapsProps {
 
@@ -25,7 +26,7 @@ export const Roadmaps: React.FC<RoadmapsProps> = ({}) => {
                 <Upload />
               </ActionStep>
               <ActionStep title="Other - 22 Nov" icon={<Ionicons name={"ios-flag"} color={Colors.WHITE} size={20}/>}>
-                <ViewActionStep />
+                <Download />
               </ActionStep>
             </Step>
             <Step 
