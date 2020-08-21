@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
 		borderStyle: "solid",
 	},
 	stepContent: {
-		marginLeft: 10,
+		// marginLeft: 10,
 	},
 	stepInner: {
-		backgroundColor: Colors.WHITE,
-		padding: 20,
+		// backgroundColor: Colors.WHITE,
+		// padding: 20,
 	},
 	stepTitle: {
 		fontWeight: "700",

@@ -35,7 +35,7 @@ export const Step: React.FC<StepProps> = ({
 
 const styles = StyleSheet.create({
 	step: {
-		paddingHorizontal: 10,
+		paddingLeft: 10,
 		paddingTop: 10,
 		paddingBottom: 20,
 		borderLeftColor: Colors.SECONDARY,

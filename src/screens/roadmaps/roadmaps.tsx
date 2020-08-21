@@ -9,6 +9,7 @@ import { Stepper } from '../../components/stepper';
 import { Step } from '../../components/stepper/step';
 import { Upload } from '../../components/stepper/upload/upload';
 import { ActionStep } from '../../components/stepper/actionStep/actionStep';
+import { ViewActionStep } from '../../components/stepper/viewActionStep/viewActionStep';
 
 interface RoadmapsProps {
 
@@ -24,23 +25,23 @@ export const Roadmaps: React.FC<RoadmapsProps> = ({}) => {
                 <Upload />
               </ActionStep>
               <ActionStep title="Other - 22 Nov" icon={<Ionicons name={"ios-flag"} color={Colors.WHITE} size={20}/>}>
-                <Upload />
+                <ViewActionStep />
               </ActionStep>
             </Step>
             <Step 
             title="MOTM - 5 DEC - ALL STEPS 1" 
             icon={<Ionicons name={"ios-eye"} color={Colors.WHITE} size={24}/>}>
               <ActionStep title="Other - 22 Nov" icon={<Ionicons name={"ios-flash"} color={Colors.WHITE} size={20}/>}>
-                <Upload />
+                <ViewActionStep />
               </ActionStep>
               <ActionStep title="Other - 22 Nov" icon={<Ionicons name={"ios-flask"} color={Colors.WHITE} size={20}/>}>
-                <Upload />
+                <ViewActionStep />
               </ActionStep> 
               <ActionStep title="Other - 22 Nov" icon={<Ionicons name={"ios-flame"} color={Colors.WHITE} size={20}/>}>
-                <Upload />
+                <ViewActionStep />
               </ActionStep>
               <ActionStep title="Other - 22 Nov" icon={<Ionicons name={"ios-flower"} color={Colors.WHITE} size={20}/>}>
-                <Upload />
+                <ViewActionStep />
               </ActionStep>   
             </Step>
             <Step 
@@ -48,7 +49,7 @@ export const Roadmaps: React.FC<RoadmapsProps> = ({}) => {
             icon={<Ionicons name={"ios-cut"} color={Colors.WHITE} size={24}/>}
             isLast={true}>
               <ActionStep title="Other - 22 Nov" icon={<Ionicons name={"ios-exit"} color={Colors.WHITE} size={20}/>}>
-                <Upload />
+                <ViewActionStep />
               </ActionStep>         
             </Step>
           </Stepper>

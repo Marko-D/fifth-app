@@ -12,6 +12,7 @@ export const Stepper: React.FC<StepperProps> = ({ children }) => {
 
 const styles = StyleSheet.create({
 	stepperContainer: {
-		paddingHorizontal: 20,
+    // backgroundColor: "red",
+		paddingLeft: 20,
 	},
 });
