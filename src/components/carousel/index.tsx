@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const Carousel = (props: any) => {
 
-  const { items, style } = props;
+  const { items, type } = props;
   const itemsPerInterval = props.itemsPerInterval === undefined
     ? 1
     : props.itemsPerInterval;
@@ -74,7 +74,8 @@ export const Carousel = (props: any) => {
         decelerationRate="fast"
       >
         {items.map((item: any, index: number) => {
-          switch (style) {
+          
+          switch (type) {
             case 'stats':
               return (
                 <Stat

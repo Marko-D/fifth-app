@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-import { View, StyleSheet, Text, Button } from "react-native";
+import { View, StyleSheet, Text, Button, Switch } from "react-native";
 import Translate from "../../components/translate";
 import { LocalizationContext, languages, APP_LANGUAGE } from "../../services/localization";
 import { AsyncStorageService } from "../../core/services/asyncStorageService";
 import { ListItem } from "native-base";
+import { Colors } from "../../styles";
 
 interface TranslationProps {}
 
@@ -33,6 +34,10 @@ const Translation: React.FC<TranslationProps> = ({}) => {
 		setChangeLocale(selectedLang);
 	};
 
+
+	const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
 	return (
 		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 			<Text style={{ marginBottom: 20, fontSize: 20 }}>
@@ -61,6 +66,14 @@ const Translation: React.FC<TranslationProps> = ({}) => {
 			) : (
 				<Button title="Switch to English" onPress={() => change("en-us")} />
 			)}
+
+			<Switch
+        trackColor={{ false: "#767577", true: Colors.EMG_SUCCESS }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
 
 			{/* <Button title="Reset Default" onPress={() => setLocale(defaultLocale)} /> */}
 

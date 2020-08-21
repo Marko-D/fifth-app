@@ -7,12 +7,12 @@ const images = [
 	{
     id: "1",
     title: "Slide 1",
-		imageUrl: "https://source.unsplash.com/random",
+		imageUrl: "https://source.unsplash.com/weekly?mountain",
 	},
 	{
     id: "2",
     title: "Slide 2",
-		imageUrl: "https://source.unsplash.com/random",
+		imageUrl: "https://source.unsplash.com/weekly?river",
 	},
 ];
 
@@ -48,7 +48,7 @@ export default function Onboarding () {
         Intro Slides Carousel:
       </Text> */}
       <Carousel
-        style='slide'
+        type='slide'
         items={images}
       />
     </View>

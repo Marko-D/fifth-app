@@ -68,7 +68,7 @@ const HomeTabNavigator = () => {
 			<Tab.Screen name="News" component={News} options={{ title: t('navigation.news') }}/>
 			<Tab.Screen name="Onboarding" component={Onboarding} options={{ title: t('navigation.onboarding') }}/>
 			{/* <Tab.Screen name="MyProfile" component={MyProfile} options={{ title: t('navigation.myProfile') }}/> */}
-			{/* <Tab.Screen name="Persons" component={Persons} options={{ title: t('navigation.persons') }}/> */}
+			<Tab.Screen name="Persons" component={Persons} options={{ title: t('navigation.persons') }}/>
 			{/* <Tab.Screen name="IFrame" component={IFrame} options={{ title: t('navigation.iFrame') }}/> */}
 			<Tab.Screen name="Translation" component={Translation} options={{ title: t('navigation.translation') }} />
 		</Tab.Navigator>
