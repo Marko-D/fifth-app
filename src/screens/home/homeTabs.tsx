@@ -16,6 +16,7 @@ import Translation from "../translation/translation";
 import { LocalizationContext } from "../../services/localization";
 import News from "../news/news";
 import Onboarding from "../onboarding/onboarding";
+import { Roadmaps } from "../roadmaps/roadmaps";
 
 
 
@@ -56,6 +57,8 @@ const HomeTabNavigator = () => {
 						iconName = "ios-airplane";
 					} else if (route.name == "Translation") {
 						iconName = "ios-paper";
+					} else if (route.name == "Roadmaps") {
+						iconName = "ios-cube";
 					}
 					return <Ionicons name={iconName} color={color} size={size} />;
 				},
@@ -71,6 +74,7 @@ const HomeTabNavigator = () => {
 			<Tab.Screen name="Persons" component={Persons} options={{ title: t('navigation.persons') }}/>
 			{/* <Tab.Screen name="IFrame" component={IFrame} options={{ title: t('navigation.iFrame') }}/> */}
 			<Tab.Screen name="Translation" component={Translation} options={{ title: t('navigation.translation') }} />
+			<Tab.Screen name="Roadmaps" component={Roadmaps} options={{ title: t('navigation.Roadmaps') }} />
 		</Tab.Navigator>
 	);
 };
