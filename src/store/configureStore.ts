@@ -12,6 +12,7 @@ import BlogReducer from "./blog";
 import PersonsReducer from "./persons";
 import InitializeReducer from "./initialize";
 import NewsReducer from "./news";
+import RoadmapsReducer from "./roadmaps";
 
 //Custom middleware
 // import Logger from "./middleware/logger";
@@ -28,7 +29,8 @@ const reducer = combineReducers({
 	blog: BlogReducer,
 	persons: PersonsReducer,
 	initialize: InitializeReducer,
-	news: NewsReducer
+	news: NewsReducer,
+	roadmaps: RoadmapsReducer,
 
 });
 

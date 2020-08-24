@@ -13,10 +13,10 @@ import active from "../active.env"
 const envs = {
   dev: {
     imagePath: "http://d27x8bwqafmno1.cloudfront.net/",
-    admin: "https://63a32bf9cb98.ngrok.io/",
-    login: "https://0a0aedd58dd8.ngrok.io/auth/",
-    lms: "https://68933b182d2f.ngrok.io/",
-    events: "https://16d15e9c0097.ngrok.io/",
+    admin: "https://qa-admin.emergenetics.com/",
+    login: "https://qa-sso.emergenetics.com/auth/",
+    lms: "https://qa-lms.emergenetics.com/",
+    events: "https://qa-ems.emergenetics.com",
     translations: "http://emergenetics-qa-i18n.itlabs.com.mk/",
     culture: "https://s3.amazonaws.com/emgadminqa/translations/",
     imageResizer: "http://emergenetics-gi-qa-images.devweb.office.it-labs.com/",

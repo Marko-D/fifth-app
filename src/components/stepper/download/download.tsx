@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import {} from "react-native";
+import React, { useState, useEffect } from "react";
+import { ActivityIndicator } from "react-native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions';
+import * as rssParser from "react-native-rss-parser";
 
 import { Colors } from "../../../styles";
 
@@ -12,70 +13,97 @@ interface DownloadProps {
 
 }
 
-
-
-
 export const Download: React.FC<DownloadProps> = () => {
-let link = 'http://www.mtsp.gov.mk/content/pdf/programi/2019/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%20%D0%BD%D0%B0%20%D0%BD%D0%B5%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BD%D0%B8%20%D0%B4%D0%B5%D0%BD%D0%BE%D0%B2%D0%B8%20%D0%B7%D0%B0%202020%20%D0%B3%D0%BE%D0%B4%D0%B8%D0%BD%D0%B0.pdf';
+	let link = 'https://eduteach.es/worksheets-grammar.pdf';
+	// const [downloadProgress, setDownloadProgress] = useState({	progress: 0	})
+	const [downloadProgress, setDownloadProgress] = useState(false)
+
+//   const requestPermission = async () => {
+// //     askPermissionsAsync = async () => {
+// //     await Permissions.askAsync(Permissions.CAMERA);
+// //     await Permissions.askAsync(Permissions.CAMERA_ROLL);
+// // };
+//     const CAMERA_ROLL = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+//     const CAMERA = await Permissions.getAsync(Permissions.CAMERA);
+//     if (!CAMERA.granted) alert("You need to enable permission to access the library.");
+//     if (!CAMERA_ROLL.granted) alert("You need to enable permission to access the library.");
+//   };
+
+	const requestPermission = async () => {
+		const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+		if (permission.status !== "granted") {
+			const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+			if (newPermission.status === "granted") {
+				//its granted.
+				alert('its granted')
+			}
+		} else {
+			//  ....your code
+		}
+	};
+
+	// const callback = downloadProgress => {
+	// 	const progress = downloadProgress.totalBytesWritten / downloadProgress.totalBytesExpectedToWrite;
+	// 	setDownloadProgress({progress});
+	// };
 
 
-// async componentDidMount() {
-//   const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
-//   if (permission.status !== 'granted') {
-//       const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-//       if (newPermission.status === 'granted') {
-//         //its granted.
-//       }
-//   } else {
-//    ....your code
-//   }
-// }
+	// tEST POVIK OD KOA KE SE NAPRAVI DOWNLOAD
+	const getData = () => {
+		// console.log("rss...");
+
+		return fetch("https://www.emergenetics.com/blog/feed/")
+			.then((response) => response.text())
+			.then((responseData) => rssParser.parse(responseData))
+			.then((rss) => {			
+				console.log(rss);
+			})
+			.catch((error) => {
+				console.log(error);
+			
+			});
+	};
 
   const downloadFile = async (url) =>{ 
+		setDownloadProgress(true)
     debugger;
     let path = url.split('/');
     const file_name = path[path.length-1];
-
-    const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
-
-    if (permission.status !== 'granted') {
-      alert('Permission Denied')
-    } else {
-      const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (newPermission.status === 'granted') {
-        FileSystem.downloadAsync(url,FileSystem.documentDirectory + file_name).then(({ uri }) => {
-          console.log('Finished downloading to ', uri);
-          MediaLibrary.createAssetAsync(uri).then(asset => {
-            console.log('asset', asset);
-            MediaLibrary.createAlbumAsync('Emergenetics+', asset)
-            .then(() => {
-              alert('download success')
-              // showMessage({
-              //   message: t('general.success'),
-              //     description: t('download.success'),
-              //   type: 'success'
-              // });
-            })
-            .catch(error => {
-              alert('download failed')
-              // showMessage({
-              //   message: t('general.success'),
-              //     description: t('download.failed'),
-              //   type: 'danger'
-              // });
-            });
-          });
-          
+    FileSystem.downloadAsync(url,FileSystem.documentDirectory + file_name).then(({ uri }) => {
+			console.log('Finished downloading to ', uri);
+      MediaLibrary.createAssetAsync(uri).then(asset => {
+				console.log('asset', asset);
+        MediaLibrary.createAlbumAsync('Emergenetics+', asset)
+        .then(() => {
+					getData()
+          alert('download success')
+          // showMessage({
+          //   message: t('general.success'),
+          //     description: t('download.success'),
+          //   type: 'success'
+					// });
+					setDownloadProgress(false)
         })
         .catch(error => {
-          console.error(error);
+					alert('download failed')
+					setDownloadProgress(false)
+          // showMessage({
+          //   message: t('general.success'),
+          //     description: t('download.failed'),
+          //   type: 'danger'
+          // });
         });
-      }
+      });
       
-    }
-  
-
+    })
+    .catch(error => {
+      console.error(error);
+    });    
   }
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
 
 	
 	return (
@@ -92,6 +120,9 @@ let link = 'http://www.mtsp.gov.mk/content/pdf/programi/2019/%D0%9F%D1%80%D0%BE%
 
 			{/* <View style={styles.btn}> */}
 
+			{/* <Text>{downloadProgress.progress}</Text> */}
+			{!!downloadProgress && 	<ActivityIndicator color="#bc2b78" size="small" style={{ marginTop: 20 }} />}
+		
 			<TouchableOpacity style={styles.btn} onPress={() => downloadFile(link)}>
 				<Text style={styles.buttonTxt}>Download</Text>
 			</TouchableOpacity>

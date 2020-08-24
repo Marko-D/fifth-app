@@ -16,7 +16,7 @@ import Translation from "../translation/translation";
 import { LocalizationContext } from "../../services/localization";
 import News from "../news/news";
 import Onboarding from "../onboarding/onboarding";
-import { Roadmaps } from "../roadmaps/roadmaps";
+import Roadmaps from "../roadmaps/roadmaps";
 
 
 
@@ -66,14 +66,14 @@ const HomeTabNavigator = () => {
 		>
 			<Tab.Screen name="Home" component={Home}  options={{ title: t('navigation.home') }}/>
 			<Tab.Screen name="Dashboard" component={Dashboard} options={{ title: t('navigation.dashboard') }}/>
-			<Tab.Screen name="Blog" component={Blog} options={{ title: t('navigation.blog') }}/>
-			<Tab.Screen name="About" component={About} options={{ title: t('navigation.about') }}/>
-			<Tab.Screen name="News" component={News} options={{ title: t('navigation.news') }}/>
-			<Tab.Screen name="Onboarding" component={Onboarding} options={{ title: t('navigation.onboarding') }}/>
+			{/* <Tab.Screen name="Blog" component={Blog} options={{ title: t('navigation.blog') }}/> */}
+			{/* <Tab.Screen name="About" component={About} options={{ title: t('navigation.about') }}/> */}
+			{/* <Tab.Screen name="News" component={News} options={{ title: t('navigation.news') }}/> */}
+			{/* <Tab.Screen name="Onboarding" component={Onboarding} options={{ title: t('navigation.onboarding') }}/> */}
 			{/* <Tab.Screen name="MyProfile" component={MyProfile} options={{ title: t('navigation.myProfile') }}/> */}
 			<Tab.Screen name="Persons" component={Persons} options={{ title: t('navigation.persons') }}/>
 			{/* <Tab.Screen name="IFrame" component={IFrame} options={{ title: t('navigation.iFrame') }}/> */}
-			<Tab.Screen name="Translation" component={Translation} options={{ title: t('navigation.translation') }} />
+			{/* <Tab.Screen name="Translation" component={Translation} options={{ title: t('navigation.translation') }} /> */}
 			<Tab.Screen name="Roadmaps" component={Roadmaps} options={{ title: t('navigation.Roadmaps') }} />
 		</Tab.Navigator>
 	);
