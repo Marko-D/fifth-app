@@ -60,53 +60,28 @@ const Roadmaps: React.FC<RoadmapsProps> = (props) => {
   return (
     <View style={styles.container}>
 		<ConnectionControl refresh={props.getData} />	
-      {!!props.roadmaps.loading ? (
+      {!!props.loading ? (
         <View>
           <Loader />
         </View>
       ) : (
         <View style={styles.container}> 
-      {/* // <FlatList
-      //   data={data}
-      //   renderItem={({ item, index }) => (
-      //     <View>
-      //       {item.topics.map((v, i) => (
-      //         <>
-      //           <Text>{v.topicName}</Text>
-      //           <Text>{v.topicDescription}</Text>
-      //         </>
-      //       ))}
-      //     </View>
-      //   )}
-      // /> */}
-        {/* <Text style={styles.title}>{props.roadmaps.name}</Text> */}
           <FlatList
             data={props.roadmaps.milestones}
-            // renderItem={renderItem}
             keyExtractor={(item, index) => (Math.floor(Math.random() * Math.floor(new Date().getTime()))).toString()}
             onRefresh={() => props.getData()}
-            refreshing={!!props.roadmaps.loading}
+            refreshing={!!props.loading}
             renderItem={({ item }) => (
-              <Stepper>
-              <View>
+              <Stepper>  
                 <Step title={item.name} icon={<Ionicons name={"ios-cube"} color={Colors.WHITE} size={24}/>}>
                   {item.actionSteps.map((x, i) => (
-                    <>
-                     <ActionStep title={!!x.name ? x.name : x.title} icon={<Ionicons name={"ios-link"} color={Colors.WHITE} size={20}/>}>
+                    <React.Fragment key={i}>
+                     <ActionStep  title={!!x.name ? x.name : x.title} icon={<Ionicons name={"ios-link"} color={Colors.WHITE} size={20}/>}>
                       {renderActionType(x.type) }                      
                     </ActionStep>
-                        {/* <Upload />
-                        <Download /> */}
-              
-               
-
-                      {/* <Text>{x.description}</Text> */}
-                    </>
+                    </React.Fragment>
                   ))}               
                 </Step>
-              </View>
-      
-       
               </Stepper>
             )}
             
@@ -182,7 +157,7 @@ const mapStateToProps = (state) => {
 	console.log("state.roadmaps.roadmaps", state.roadmaps.roadmaps);
 	return {
 		roadmaps: state.roadmaps.roadmaps,
-		loading: state.loading,
+		loading: state.roadmaps.loading,
 	};
 };
 

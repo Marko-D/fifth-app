@@ -65,17 +65,14 @@ const RoadmapsReducer = createSlice({
 	initialState,
 	reducers: {
 		getRequest: (state: any) => {
-      debugger
 			state.loading = true;
 		},
 		getSuccess: (state: any, action: any) => {
-      debugger
 			const data: Roadmaps = action.payload;
 			state.roadmaps = data;
 			state.loading = false;
 		},
 		getError: (state: any, action: any) => {
-      debugger
 			state.loading = false;
 			state.error = action.payload;
 		},
