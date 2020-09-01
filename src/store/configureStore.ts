@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 
 //Reducers
 // import ExampleReducer from "./example";
+import ModalReducer  from "./modal";
 import AuthReducer from "./auth";
 import DashboardReducer from "./dashboard";
 import BlogReducer from "./blog";
@@ -24,6 +25,7 @@ import logger from 'redux-logger'
 
 const reducer = combineReducers({
 	// example: ExampleReducer,
+	modal: ModalReducer,
 	auth: AuthReducer,
 	dashboard: DashboardReducer,
 	blog: BlogReducer,

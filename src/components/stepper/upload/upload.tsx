@@ -118,7 +118,7 @@ export const Upload: React.FC<UploadProps> = () => {
         debugger
         request.post('/roadmaps/6038e61f-19f2-4b22-9487-f68af6c7c505/actionsteps/fde13b03-8061-4831-b8b7-087905c71524/users/dfc5bf50-d7d6-4b46-96eb-7f2888d421f3/documents', data)
         .then(res => {
-          alert(res)
+          alert('Upload Successful');
         }).catch(err => {
           alert('eeeeeeeeeeeeeeerrr')
         })
@@ -135,9 +135,9 @@ export const Upload: React.FC<UploadProps> = () => {
         //   }
         // );
         // let responseJson = await res.json();
-        if (res.status == 1) {
-          alert('Upload Successful');
-        }
+        // if (res.status == 1) {
+        //   alert('Upload Successful');
+        // }
       } else {
         //if no file selected the show alert
         alert('Please Select File first');

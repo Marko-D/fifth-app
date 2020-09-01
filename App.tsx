@@ -22,6 +22,7 @@ import translationService from "./src/screens/translation/translationService";
 import Toast from 'react-native-simple-toast';
 import AppLocalization from "./src/services/localization";
 import { Languages } from "./src/services/languagesList";
+import  RootModal  from "./src/components/modals/rootModal";
 
 const initContext = {};
 // export const LocalizationContext: any = createContext(initContext);
@@ -158,6 +159,7 @@ const App = () => {
 						{/* <LocalizationContext.Provider value={localizationContext}> */}
 							<AppLocalization languagesList={languagesList}>
 								<MainStack />
+								<RootModal />
 							</AppLocalization>
 						{/* </LocalizationContext.Provider> */}
 					</PersistGate>

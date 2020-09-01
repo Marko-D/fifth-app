@@ -1,37 +1,17 @@
-// import axios from "axios";
+import axios from 'axios';
 
 import ENV from '../../../config/env';
-
-// // For common config
-// const setHeaders = (token) => {
-//   axios.defaults.headers.post["Content-Type"] = "application/json";
-//   axios.defaults.headers.common['Authorization'] = token;
-// }
-  
-// const lmsInstance = axios.create({
-//     baseURL: ENV.lms
-// });
-
-// // const customAxios = axios.create({
-// //     baseURL: 'https://some-custom-domain.com/api/'
-// // });
-
-// export {
-//   setHeaders,
-//   lmsInstance,
-//   // customAxios
-// };
-
-
-import axios from 'axios';
 
 const client = (env, token = null) => {
     const defaultOptions = {
         headers: {
-            Authorization: token ? `JWT ${token}` : '',
-        },
+          "Authorization": token ? `JWT ${token}` : '',
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json; charset=utf-8"
+        }
     };
-    let urlWihtEnv = ENV[env]
+
+    const urlWihtEnv = ENV[env];
     
     return {
         get: (url, options = {}) => axios.get(`${urlWihtEnv}${url}`, { ...defaultOptions, ...options }),
